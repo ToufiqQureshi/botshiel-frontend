@@ -1,177 +1,278 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
-/* Chess.com inspired color variables */
 :root {
-  --board-light: #eeedd5;
-  --board-dark: #769656;
-  --bg-primary: #312e2b;
-  --bg-secondary: #262522;
-  --bg-panel: #21201d;
-  --text-primary: #ffffff;
-  --text-secondary: #b9b9b9;
-  --accent-green: #81b64c;
-  --accent-green-hover: #90c05a;
-  --border-color: #3d3a37;
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #111111;
+  --bg-elevated: #161616;
+  --border-primary: #1f1f1f;
+  --border-secondary: #262626;
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --accent-blue: #3b82f6;
+  --accent-green: #22c55e;
+  --accent-red: #ef4444;
+  --accent-yellow: #eab308;
+  --accent-orange: #f97316;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html, body, #root {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   background-color: var(--bg-primary);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Snake head - styled like a chess piece */
-.snake-head {
-  background: radial-gradient(circle at 35% 35%, #5a4a3a, #3d3028);
-  border-radius: 4px;
-  box-shadow: inset 0 -2px 3px rgba(0,0,0,0.3), 0 1px 3px rgba(0,0,0,0.4);
-  position: relative;
-}
-
-.snake-head::after {
-  content: '';
-  position: absolute;
-  top: 15%;
-  left: 15%;
-  width: 35%;
-  height: 35%;
-  background: radial-gradient(circle, rgba(255,255,255,0.25), transparent);
-  border-radius: 50%;
-}
-
-/* Snake body - wooden piece style */
-.snake-body {
-  background: radial-gradient(circle at 35% 35%, #6b5b4a, #4a3c2e);
-  border-radius: 3px;
-  box-shadow: inset 0 -1px 2px rgba(0,0,0,0.3);
-  transition: opacity 0.08s ease;
-}
-
-/* Food - golden chess piece style */
-.food {
-  background: radial-gradient(circle at 35% 35%, #f5d76e, #c9a83a);
-  border-radius: 50%;
-  box-shadow: 0 0 6px rgba(245, 215, 110, 0.5), inset 0 -2px 3px rgba(0,0,0,0.2);
-  animation: foodGlow 1.5s ease-in-out infinite;
-}
-
-@keyframes foodGlow {
-  0%, 100% {
-    transform: scale(0.8);
-    box-shadow: 0 0 4px rgba(245, 215, 110, 0.3), inset 0 -2px 3px rgba(0,0,0,0.2);
-  }
-  50% {
-    transform: scale(0.95);
-    box-shadow: 0 0 10px rgba(245, 215, 110, 0.6), inset 0 -2px 3px rgba(0,0,0,0.2);
-  }
-}
-
-/* Board cells */
-.cell-light {
-  background-color: var(--board-light);
-}
-
-.cell-dark {
-  background-color: var(--board-dark);
-}
-
-/* Highlight last move style */
-.cell-highlight-light {
-  background-color: #f6f669;
-}
-
-.cell-highlight-dark {
-  background-color: #baca2b;
-}
-
-/* Chess.com style button */
-.btn-green {
-  background-color: var(--accent-green);
-  color: white;
-  font-weight: 600;
-  border-radius: 4px;
-  transition: background-color 0.15s ease;
-}
-
-.btn-green:hover {
-  background-color: var(--accent-green-hover);
-}
-
-.btn-green:active {
-  background-color: #6fa03e;
+.font-mono {
+  font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
+  background: var(--bg-primary);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #4d4a46;
+  background: var(--border-secondary);
   border-radius: 3px;
 }
 
-/* Selection */
-* {
-  -webkit-tap-highlight-color: transparent;
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
 }
 
-.select-none {
-  -webkit-user-select: none;
-  user-select: none;
+/* Custom utility classes */
+.card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
 }
 
-/* Smooth overlay transitions */
-.game-overlay {
-  animation: overlayFadeIn 0.2s ease-out;
+.card-elevated {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-secondary);
+  border-radius: 8px;
 }
 
-@keyframes overlayFadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* D-pad button styling */
-.dpad-btn {
-  background: #3d3a37;
-  border: 1px solid #4d4a46;
-  color: #b9b9b9;
+.btn-primary {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  font-weight: 500;
+  padding: 6px 14px;
   border-radius: 6px;
-  transition: all 0.1s ease;
-  display: flex;
+  font-size: 13px;
+  transition: opacity 0.15s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  border: 1px solid var(--border-secondary);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-secondary:hover {
+  background: var(--bg-tertiary);
+}
+
+.badge {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
-.dpad-btn:active {
-  background: #4d4a46;
-  color: white;
-  transform: scale(0.95);
+.badge-green {
+  background: rgba(34, 197, 94, 0.1);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.2);
 }
 
-/* Move list entry animation */
-.move-entry {
-  animation: slideIn 0.2s ease-out;
+.badge-red {
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.2);
 }
 
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.badge-yellow {
+  background: rgba(234, 179, 8, 0.1);
+  color: #facc15;
+  border: 1px solid rgba(234, 179, 8, 0.2);
+}
+
+.badge-blue {
+  background: rgba(59, 130, 246, 0.1);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.badge-gray {
+  background: rgba(113, 113, 122, 0.1);
+  color: #a1a1aa;
+  border: 1px solid rgba(113, 113, 122, 0.2);
+}
+
+.badge-orange {
+  background: rgba(249, 115, 22, 0.1);
+  color: #fb923c;
+  border: 1px solid rgba(249, 115, 22, 0.2);
+}
+
+/* Toggle Switch */
+.toggle {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  background: var(--border-secondary);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.toggle.active {
+  background: var(--accent-blue);
+}
+
+.toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.toggle.active::after {
+  transform: translateX(16px);
+}
+
+/* Slider */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: var(--border-secondary);
+  border-radius: 2px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--text-primary);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Table */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th {
+  text-align: left;
+  padding: 10px 16px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.data-table td {
+  padding: 10px 16px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--border-primary);
+  color: var(--text-secondary);
+}
+
+.data-table tr:hover td {
+  background: var(--bg-tertiary);
+}
+
+.data-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Tab navigation */
+.nav-tab {
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+  border: none;
+  background: transparent;
+}
+
+.nav-tab:hover {
+  color: var(--text-primary);
+}
+
+.nav-tab.active {
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+}
+
+/* Chart tooltip */
+.recharts-tooltip-wrapper {
+  outline: none;
+}
+
+.custom-tooltip {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-secondary);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 12px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-in {
+  animation: fadeIn 0.2s ease-out;
 }
