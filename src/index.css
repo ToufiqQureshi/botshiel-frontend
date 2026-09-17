@@ -1,21 +1,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
+/* ============ DARK MODE (default) ============ */
 :root {
   --bg-primary: #000000;
   --bg-secondary: #0a0a0a;
   --bg-tertiary: #111111;
   --bg-elevated: #161616;
+  --bg-hover: #0a0a0a;
   --border-primary: #1f1f1f;
   --border-secondary: #262626;
   --text-primary: #fafafa;
   --text-secondary: #a1a1aa;
   --text-muted: #71717a;
+  --text-faint: #3f3f46;
   --accent-blue: #3b82f6;
   --accent-green: #22c55e;
   --accent-red: #ef4444;
   --accent-yellow: #eab308;
   --accent-orange: #f97316;
+  --input-bg: #111111;
+  --shadow-modal: rgba(0, 0, 0, 0.7);
+  --code-bg: #0a0a0a;
+  --toggle-bg: #262626;
+  --toggle-active: #3b82f6;
+  --slider-track: #262626;
+  --slider-thumb: #fafafa;
+}
+
+/* ============ LIGHT MODE ============ */
+html.light {
+  --bg-primary: #ffffff;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f9fafb;
+  --bg-elevated: #f3f4f6;
+  --bg-hover: #f9fafb;
+  --border-primary: #e5e7eb;
+  --border-secondary: #d1d5db;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --text-faint: #9ca3af;
+  --accent-blue: #2563eb;
+  --accent-green: #16a34a;
+  --accent-red: #dc2626;
+  --accent-yellow: #ca8a04;
+  --accent-orange: #ea580c;
+  --input-bg: #ffffff;
+  --shadow-modal: rgba(0, 0, 0, 0.3);
+  --code-bg: #f3f4f6;
+  --toggle-bg: #d1d5db;
+  --toggle-active: #2563eb;
+  --slider-track: #d1d5db;
+  --slider-thumb: #111827;
 }
 
 * {
@@ -32,6 +69,7 @@ html, body, #root {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .font-mono {
@@ -54,7 +92,7 @@ html, body, #root {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
+  background: var(--text-muted);
 }
 
 /* Custom utility classes */
@@ -114,38 +152,62 @@ html, body, #root {
 
 .badge-green {
   background: rgba(34, 197, 94, 0.1);
-  color: #4ade80;
+  color: #16a34a;
   border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+html:not(.light) .badge-green {
+  color: #4ade80;
 }
 
 .badge-red {
   background: rgba(239, 68, 68, 0.1);
-  color: #f87171;
+  color: #dc2626;
   border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+html:not(.light) .badge-red {
+  color: #f87171;
 }
 
 .badge-yellow {
   background: rgba(234, 179, 8, 0.1);
-  color: #facc15;
+  color: #a16207;
   border: 1px solid rgba(234, 179, 8, 0.2);
+}
+
+html:not(.light) .badge-yellow {
+  color: #facc15;
 }
 
 .badge-blue {
   background: rgba(59, 130, 246, 0.1);
-  color: #60a5fa;
+  color: #2563eb;
   border: 1px solid rgba(59, 130, 246, 0.2);
 }
 
+html:not(.light) .badge-blue {
+  color: #60a5fa;
+}
+
 .badge-gray {
-  background: rgba(113, 113, 122, 0.1);
+  background: rgba(107, 114, 128, 0.1);
+  color: #6b7280;
+  border: 1px solid rgba(107, 114, 128, 0.2);
+}
+
+html:not(.light) .badge-gray {
   color: #a1a1aa;
-  border: 1px solid rgba(113, 113, 122, 0.2);
 }
 
 .badge-orange {
   background: rgba(249, 115, 22, 0.1);
-  color: #fb923c;
+  color: #c2410c;
   border: 1px solid rgba(249, 115, 22, 0.2);
+}
+
+html:not(.light) .badge-orange {
+  color: #fb923c;
 }
 
 /* Toggle Switch */
@@ -153,14 +215,15 @@ html, body, #root {
   position: relative;
   width: 36px;
   height: 20px;
-  background: var(--border-secondary);
+  background: var(--toggle-bg);
   border-radius: 10px;
   cursor: pointer;
   transition: background 0.2s;
+  flex-shrink: 0;
 }
 
 .toggle.active {
-  background: var(--accent-blue);
+  background: var(--toggle-active);
 }
 
 .toggle::after {
@@ -185,7 +248,7 @@ input[type="range"] {
   appearance: none;
   width: 100%;
   height: 4px;
-  background: var(--border-secondary);
+  background: var(--slider-track);
   border-radius: 2px;
   outline: none;
 }
@@ -195,7 +258,7 @@ input[type="range"]::-webkit-slider-thumb {
   appearance: none;
   width: 16px;
   height: 16px;
-  background: var(--text-primary);
+  background: var(--slider-thumb);
   border-radius: 50%;
   cursor: pointer;
 }
@@ -225,7 +288,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .data-table tr:hover td {
-  background: var(--bg-tertiary);
+  background: var(--bg-hover);
 }
 
 .data-table tr:last-child td {
@@ -275,4 +338,12 @@ input[type="range"]::-webkit-slider-thumb {
 
 .animate-in {
   animation: fadeIn 0.2s ease-out;
+}
+
+/* Theme transition helper */
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.15s ease !important;
 }

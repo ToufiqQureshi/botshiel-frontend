@@ -47,8 +47,8 @@ export default function MitigationRules() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-semibold text-white">Mitigation Rules</h1>
-          <p className="text-sm text-[#71717a]">Define how threats are handled when detected</p>
+          <h1 className="text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>Mitigation Rules</h1>
+          <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Define how threats are handled when detected</p>
         </div>
         <button onClick={() => setShowBuilder(!showBuilder)} className="btn-primary text-xs flex items-center gap-1.5">
           <Plus size={12} /> Custom Rule
@@ -59,44 +59,44 @@ export default function MitigationRules() {
       {showBuilder && (
         <div className="card p-5 animate-in">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-semibold text-white">Create Custom Rule</h3>
-            <button onClick={() => setShowBuilder(false)} className="text-[#71717a] hover:text-white text-sm">×</button>
+            <h3 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Create Custom Rule</h3>
+            <button onClick={() => setShowBuilder(false)} className="text-sm" style={{ color: 'var(--text-muted)' }}>×</button>
           </div>
 
           <div className="space-y-4">
             <div>
-              <label className="text-xs text-[#71717a] block mb-1.5">Rule Name</label>
+              <label className="text-xs block mb-1.5" style={{ color: 'var(--text-muted)' }}>Rule Name</label>
               <input
                 type="text"
                 value={ruleName}
                 onChange={(e) => setRuleName(e.target.value)}
                 placeholder="e.g., Block suspicious JA4 fingerprints"
-                className="w-full px-3 py-2 text-sm rounded-md text-white placeholder-[#3f3f46] focus:outline-none focus:ring-1 focus:ring-[#3f3f46]"
-                style={{ background: '#111', border: '1px solid #262626' }}
+                className="w-full px-3 py-2 text-sm rounded-md focus:outline-none focus:ring-1"
+                style={{ background: 'var(--input-bg)', border: '1px solid var(--border-secondary)', color: 'var(--text-primary)' }}
               />
             </div>
 
             {/* Conditions */}
             <div>
-              <label className="text-xs text-[#71717a] block mb-1.5">Conditions</label>
+              <label className="text-xs block mb-1.5" style={{ color: 'var(--text-muted)' }}>Conditions</label>
               <div className="space-y-2">
                 {conditions.map((cond, idx) => (
                   <div key={idx} className="flex items-center gap-2">
-                    {idx > 0 && <span className="text-xs text-[#71717a] w-8">AND</span>}
-                    {idx === 0 && <span className="text-xs text-[#71717a] w-8">IF</span>}
+                    {idx > 0 && <span className="text-xs w-8" style={{ color: 'var(--text-muted)' }}>AND</span>}
+                    {idx === 0 && <span className="text-xs w-8" style={{ color: 'var(--text-muted)' }}>IF</span>}
                     <select
                       value={cond.field}
                       onChange={(e) => updateCondition(idx, 'field', e.target.value)}
-                      className="px-2 py-1.5 text-xs rounded text-white focus:outline-none"
-                      style={{ background: '#111', border: '1px solid #262626' }}
+                      className="px-2 py-1.5 text-xs rounded focus:outline-none"
+                      style={{ background: 'var(--input-bg)', border: '1px solid var(--border-secondary)', color: 'var(--text-primary)' }}
                     >
                       {ruleFields.map(f => <option key={f} value={f}>{f}</option>)}
                     </select>
                     <select
                       value={cond.operator}
                       onChange={(e) => updateCondition(idx, 'operator', e.target.value)}
-                      className="px-2 py-1.5 text-xs rounded text-white focus:outline-none"
-                      style={{ background: '#111', border: '1px solid #262626' }}
+                      className="px-2 py-1.5 text-xs rounded focus:outline-none"
+                      style={{ background: 'var(--input-bg)', border: '1px solid var(--border-secondary)', color: 'var(--text-primary)' }}
                     >
                       {operators.map(o => <option key={o} value={o}>{o}</option>)}
                     </select>
@@ -105,11 +105,11 @@ export default function MitigationRules() {
                       value={cond.value}
                       onChange={(e) => updateCondition(idx, 'value', e.target.value)}
                       placeholder="Value..."
-                      className="flex-1 px-2 py-1.5 text-xs rounded text-white font-mono placeholder-[#3f3f46] focus:outline-none"
-                      style={{ background: '#111', border: '1px solid #262626' }}
+                      className="flex-1 px-2 py-1.5 text-xs rounded font-mono focus:outline-none"
+                      style={{ background: 'var(--input-bg)', border: '1px solid var(--border-secondary)', color: 'var(--text-primary)' }}
                     />
                     {conditions.length > 1 && (
-                      <button onClick={() => removeCondition(idx)} className="text-[#71717a] hover:text-red-400">
+                      <button onClick={() => removeCondition(idx)} className="hover:text-red-400" style={{ color: 'var(--text-muted)' }}>
                         <Trash2 size={14} />
                       </button>
                     )}
@@ -123,18 +123,19 @@ export default function MitigationRules() {
 
             {/* Action */}
             <div>
-              <label className="text-xs text-[#71717a] block mb-1.5">Then Action</label>
+              <label className="text-xs block mb-1.5" style={{ color: 'var(--text-muted)' }}>Then Action</label>
               <div className="flex gap-2">
                 {actions.map(a => (
                   <button
                     key={a}
                     onClick={() => setAction(a)}
                     className={`px-3 py-1.5 text-xs rounded font-medium transition-colors ${
-                      action === a ? 'text-white' : 'text-[#71717a] hover:text-white'
+                      action === a ? '' : ''
                     }`}
                     style={{
-                      background: action === a ? (a === 'BLOCK' ? '#7f1d1d' : a === 'CHALLENGE' ? '#713f12' : a === 'DECEIVE' ? '#7c2d12' : a === 'PASS' ? '#14532d' : '#1f1f1f') : '#111',
-                      border: `1px solid ${action === a ? '#3f3f46' : '#262626'}`,
+                      background: action === a ? (a === 'BLOCK' ? '#7f1d1d' : a === 'CHALLENGE' ? '#713f12' : a === 'DECEIVE' ? '#7c2d12' : a === 'PASS' ? '#14532d' : 'var(--bg-tertiary)') : 'var(--input-bg)',
+                      border: `1px solid ${action === a ? 'var(--border-secondary)' : 'var(--border-secondary)'}`,
+                      color: action === a ? 'var(--text-primary)' : 'var(--text-muted)',
                     }}
                   >
                     {a}
@@ -144,12 +145,12 @@ export default function MitigationRules() {
             </div>
 
             {/* Rule Preview */}
-            <div className="rounded p-3 font-mono text-xs" style={{ background: '#0a0a0a', border: '1px solid #1f1f1f' }}>
-              <span className="text-[#71717a]">Rule Preview: </span>
+            <div className="rounded p-3 font-mono text-xs" style={{ background: 'var(--code-bg)', border: '1px solid var(--border-primary)' }}>
+              <span style={{ color: 'var(--text-muted)' }}>Rule Preview: </span>
               <span className="text-blue-400">IF</span>{' '}
               {conditions.map((c, i) => (
                 <span key={i}>
-                  {i > 0 && <><span className="text-[#71717a]"> AND </span></>}
+                  {i > 0 && <><span style={{ color: 'var(--text-muted)' }}> AND </span></>}
                   <span className="text-green-400">[{c.field}]</span>{' '}
                   <span className="text-yellow-400">{c.operator}</span>{' '}
                   <span className="text-orange-400">[{c.value || '...'}]</span>
@@ -169,31 +170,31 @@ export default function MitigationRules() {
 
       {/* Managed Rules */}
       <div className="card overflow-hidden">
-        <div className="px-5 py-4 border-b flex items-center justify-between" style={{ borderColor: '#1f1f1f' }}>
+        <div className="px-5 py-4 border-b flex items-center justify-between" style={{ borderColor: 'var(--border-primary)' }}>
           <div>
-            <h2 className="text-sm font-semibold text-white">Managed Rules</h2>
-            <p className="text-xs text-[#71717a] mt-0.5">Pre-configured rules maintained by Bot-Shield</p>
+            <h2 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Managed Rules</h2>
+            <p className="text-xs mt-0.5" style={{ color: 'var(--text-muted)' }}>Pre-configured rules maintained by Bot-Shield</p>
           </div>
           <span className="badge badge-blue">{rules.filter(r => r.enabled).length} active</span>
         </div>
-        <div className="divide-y" style={{ borderColor: '#1f1f1f' }}>
+        <div className="divide-y" style={{ borderColor: 'var(--border-primary)' }}>
           {rules.map(rule => (
-            <div key={rule.id} className="px-5 py-3 flex items-center justify-between hover:bg-[#0a0a0a] transition-colors">
+            <div key={rule.id} className="px-5 py-3 flex items-center justify-between transition-colors" style={{ background: 'transparent' }}>
               <div className="flex items-center gap-3 flex-1 min-w-0">
                 <button onClick={() => toggleRule(rule.id)} className="flex-shrink-0">
                   {rule.enabled ? (
                     <ToggleRight size={24} className="text-blue-400" />
                   ) : (
-                    <ToggleLeft size={24} className="text-[#3f3f46]" />
+                    <ToggleLeft size={24} style={{ color: 'var(--text-faint)' }} />
                   )}
                 </button>
                 <div className="min-w-0">
-                  <p className={`text-sm font-medium ${rule.enabled ? 'text-white' : 'text-[#71717a]'}`}>{rule.name}</p>
-                  <p className="text-xs text-[#71717a] truncate">{rule.description}</p>
+                  <p className="text-sm font-medium" style={{ color: rule.enabled ? 'var(--text-primary)' : 'var(--text-muted)' }}>{rule.name}</p>
+                  <p className="text-xs truncate" style={{ color: 'var(--text-muted)' }}>{rule.description}</p>
                 </div>
               </div>
               <div className="flex items-center gap-4 flex-shrink-0 ml-4">
-                <span className="text-xs font-mono text-[#71717a]">{rule.hits.toLocaleString()} hits</span>
+                <span className="text-xs font-mono" style={{ color: 'var(--text-muted)' }}>{rule.hits.toLocaleString()} hits</span>
                 <span className={`badge ${rule.enabled ? 'badge-green' : 'badge-gray'}`}>
                   {rule.enabled ? 'Active' : 'Disabled'}
                 </span>
@@ -205,10 +206,10 @@ export default function MitigationRules() {
 
       {/* Custom Exceptions */}
       <div className="card overflow-hidden">
-        <div className="px-5 py-4 border-b flex items-center justify-between" style={{ borderColor: '#1f1f1f' }}>
+        <div className="px-5 py-4 border-b flex items-center justify-between" style={{ borderColor: 'var(--border-primary)' }}>
           <div>
-            <h2 className="text-sm font-semibold text-white">Custom Exceptions</h2>
-            <p className="text-xs text-[#71717a] mt-0.5">Whitelisted IPs, bots, and fingerprints</p>
+            <h2 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Custom Exceptions</h2>
+            <p className="text-xs mt-0.5" style={{ color: 'var(--text-muted)' }}>Whitelisted IPs, bots, and fingerprints</p>
           </div>
           <button className="btn-secondary text-xs flex items-center gap-1.5">
             <Plus size={12} /> Add Exception
@@ -229,11 +230,11 @@ export default function MitigationRules() {
               {exceptions.map(ex => (
                 <tr key={ex.id}>
                   <td><span className="badge badge-blue">{ex.type}</span></td>
-                  <td className="font-mono text-xs text-white">{ex.value}</td>
+                  <td className="font-mono text-xs" style={{ color: 'var(--text-primary)' }}>{ex.value}</td>
                   <td className="text-xs">{ex.reason}</td>
-                  <td className="text-xs text-[#71717a]">{ex.createdAt}</td>
+                  <td className="text-xs" style={{ color: 'var(--text-muted)' }}>{ex.createdAt}</td>
                   <td>
-                    <button onClick={() => removeException(ex.id)} className="text-[#71717a] hover:text-red-400 transition-colors">
+                    <button onClick={() => removeException(ex.id)} className="hover:text-red-400 transition-colors" style={{ color: 'var(--text-muted)' }}>
                       <Trash2 size={14} />
                     </button>
                   </td>

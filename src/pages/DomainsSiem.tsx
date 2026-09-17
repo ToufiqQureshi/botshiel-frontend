@@ -18,18 +18,18 @@ export default function DomainsSiem() {
     <div className="space-y-6 animate-in">
       {/* Header */}
       <div>
-        <h1 className="text-lg font-semibold text-white">Domains & SIEM</h1>
-        <p className="text-sm text-[#71717a]">Manage protected domains and data export integrations</p>
+        <h1 className="text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>Domains & SIEM</h1>
+        <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Manage protected domains and data export integrations</p>
       </div>
 
       {/* Protected Domains */}
       <div className="card overflow-hidden">
-        <div className="px-5 py-4 border-b flex items-center justify-between" style={{ borderColor: '#1f1f1f' }}>
+        <div className="px-5 py-4 border-b flex items-center justify-between" style={{ borderColor: 'var(--border-primary)' }}>
           <div className="flex items-center gap-2">
-            <Globe size={16} className="text-[#71717a]" />
+            <Globe size={16} style={{ color: 'var(--text-muted)' }} />
             <div>
-              <h2 className="text-sm font-semibold text-white">Protected Domains</h2>
-              <p className="text-xs text-[#71717a]">Sites routed through Bot-Shield edge</p>
+              <h2 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Protected Domains</h2>
+              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Sites routed through Bot-Shield edge</p>
             </div>
           </div>
           <button className="btn-primary text-xs flex items-center gap-1.5">
@@ -53,7 +53,7 @@ export default function DomainsSiem() {
                 <tr key={domain.id}>
                   <td>
                     <div className="flex items-center gap-2">
-                      <span className="text-sm text-white font-medium">{domain.domain}</span>
+                      <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{domain.domain}</span>
                     </div>
                   </td>
                   <td className="font-mono text-xs">{domain.origin}</td>
@@ -67,7 +67,7 @@ export default function DomainsSiem() {
                       <span className="text-xs">
                         {domain.certStatus === 'valid' ? 'Valid' : 'Expiring'}
                       </span>
-                      <span className="text-[10px] text-[#71717a]">({domain.certExpiry})</span>
+                      <span className="text-[10px]" style={{ color: 'var(--text-muted)' }}>({domain.certExpiry})</span>
                     </div>
                   </td>
                   <td>
@@ -75,7 +75,7 @@ export default function DomainsSiem() {
                   </td>
                   <td className="font-mono text-xs">{domain.requests}</td>
                   <td>
-                    <button className="text-[#71717a] hover:text-white transition-colors">
+                    <button className="transition-colors" style={{ color: 'var(--text-muted)' }}>
                       <ExternalLink size={14} />
                     </button>
                   </td>
@@ -89,10 +89,10 @@ export default function DomainsSiem() {
       {/* SIEM Integrations */}
       <div>
         <div className="flex items-center gap-2 mb-4">
-          <Webhook size={16} className="text-[#71717a]" />
+          <Webhook size={16} style={{ color: 'var(--text-muted)' }} />
           <div>
-            <h2 className="text-sm font-semibold text-white">SIEM Integrations</h2>
-            <p className="text-xs text-[#71717a]">Export logs and events to your security stack</p>
+            <h2 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>SIEM Integrations</h2>
+            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Export logs and events to your security stack</p>
           </div>
         </div>
 
@@ -105,7 +105,7 @@ export default function DomainsSiem() {
                     background: integration.name === 'Datadog' ? '#1a1000' :
                                integration.name === 'Splunk' ? '#1a0f00' :
                                integration.name === 'AWS S3' ? '#0a1a0a' : '#0a0a1a',
-                    border: '1px solid #262626',
+                    border: '1px solid var(--border-secondary)',
                     color: integration.name === 'Datadog' ? '#632ca6' :
                            integration.name === 'Splunk' ? '#e85d04' :
                            integration.name === 'AWS S3' ? '#ff9900' : '#0077cc',
@@ -113,41 +113,41 @@ export default function DomainsSiem() {
                     {integration.name.charAt(0)}
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-white">{integration.name}</p>
-                    <p className="text-[11px] text-[#71717a]">{integration.description}</p>
+                    <p className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{integration.name}</p>
+                    <p className="text-[11px]" style={{ color: 'var(--text-muted)' }}>{integration.description}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-1.5">
                   {integration.status === 'connected' ? (
                     <CheckCircle2 size={14} className="text-green-400" />
                   ) : (
-                    <XCircle size={14} className="text-[#3f3f46]" />
+                    <XCircle size={14} style={{ color: 'var(--text-faint)' }} />
                   )}
-                  <span className={`text-xs ${integration.status === 'connected' ? 'text-green-400' : 'text-[#71717a]'}`}>
+                  <span className={`text-xs ${integration.status === 'connected' ? 'text-green-400' : ''}`} style={{ color: integration.status === 'connected' ? undefined : 'var(--text-muted)' }}>
                     {integration.status === 'connected' ? 'Connected' : 'Disconnected'}
                   </span>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between pt-3 border-t" style={{ borderColor: '#1f1f1f' }}>
+              <div className="flex items-center justify-between pt-3 border-t" style={{ borderColor: 'var(--border-primary)' }}>
                 <div className="flex gap-4">
                   <div>
-                    <p className="text-[10px] text-[#71717a] uppercase">Last Sync</p>
-                    <p className="text-xs font-mono text-white">{integration.lastSync}</p>
+                    <p className="text-[10px] uppercase" style={{ color: 'var(--text-muted)' }}>Last Sync</p>
+                    <p className="text-xs font-mono" style={{ color: 'var(--text-primary)' }}>{integration.lastSync}</p>
                   </div>
                   <div>
-                    <p className="text-[10px] text-[#71717a] uppercase">Events</p>
-                    <p className="text-xs font-mono text-white">{integration.events}</p>
+                    <p className="text-[10px] uppercase" style={{ color: 'var(--text-muted)' }}>Events</p>
+                    <p className="text-xs font-mono" style={{ color: 'var(--text-primary)' }}>{integration.events}</p>
                   </div>
                 </div>
                 <button
                   onClick={() => toggleIntegration(integration.id)}
                   className={`text-xs px-3 py-1.5 rounded font-medium ${
                     integration.status === 'connected'
-                      ? 'text-[#a1a1aa] hover:text-white'
+                      ? 'text-blue-400 hover:text-blue-300'
                       : 'text-blue-400 hover:text-blue-300'
                   }`}
-                  style={{ border: `1px solid ${integration.status === 'connected' ? '#262626' : '#1e3a5f'}` }}
+                  style={{ border: `1px solid ${integration.status === 'connected' ? 'var(--border-secondary)' : '#1e3a5f'}` }}
                 >
                   {integration.status === 'connected' ? 'Configure' : 'Connect'}
                 </button>

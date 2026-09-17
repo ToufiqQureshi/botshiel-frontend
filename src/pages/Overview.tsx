@@ -15,12 +15,12 @@ function CustomTooltip({ active, payload, label }: any) {
   if (!active || !payload) return null;
   return (
     <div className="custom-tooltip">
-      <p className="text-white font-medium mb-1.5">{label}</p>
+      <p className="font-medium mb-1.5" style={{ color: 'var(--text-primary)' }}>{label}</p>
       {payload.map((entry: any, i: number) => (
         <div key={i} className="flex items-center gap-2 text-xs">
           <span className="w-2 h-2 rounded-full" style={{ background: entry.color }}></span>
-          <span className="text-[#a1a1aa]">{entry.name}:</span>
-          <span className="text-white font-mono">{entry.value.toLocaleString()}</span>
+          <span style={{ color: 'var(--text-secondary)' }}>{entry.name}:</span>
+          <span className="font-mono" style={{ color: 'var(--text-primary)' }}>{entry.value.toLocaleString()}</span>
         </div>
       ))}
     </div>
@@ -33,11 +33,11 @@ export default function Overview() {
   return (
     <div className="space-y-6 animate-in">
       {/* Shadow Mode Banner */}
-      <div className="flex items-center gap-3 px-4 py-3 rounded-lg" style={{ background: '#0f0f00', border: '1px solid #332b00' }}>
+      <div className="flex items-center gap-3 px-4 py-3 rounded-lg" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-secondary)' }}>
         <AlertTriangle size={16} className="text-yellow-500 flex-shrink-0" />
         <div className="flex-1">
           <span className="text-sm font-medium text-yellow-500">Shadow Mode Active</span>
-          <span className="text-sm text-[#a1a1aa] ml-2">— Evaluating traffic but not dropping requests. <button className="text-yellow-500 underline underline-offset-2 hover:text-yellow-400">Switch to Active Mode</button></span>
+          <span className="text-sm ml-2" style={{ color: 'var(--text-secondary)' }}>— Evaluating traffic but not dropping requests. <button className="text-yellow-500 underline underline-offset-2 hover:text-yellow-400">Switch to Active Mode</button></span>
         </div>
       </div>
 
@@ -48,14 +48,14 @@ export default function Overview() {
           return (
             <div key={i} className="card p-4">
               <div className="flex items-center justify-between mb-3">
-                <Icon size={16} className={m.color === 'red' ? 'text-red-400' : m.color === 'yellow' ? 'text-yellow-400' : m.color === 'orange' ? 'text-orange-400' : 'text-[#71717a]'} />
+                <Icon size={16} className={m.color === 'red' ? 'text-red-400' : m.color === 'yellow' ? 'text-yellow-400' : m.color === 'orange' ? 'text-orange-400' : ''} style={{ color: m.color ? undefined : 'var(--text-muted)' }} />
                 <div className={`flex items-center gap-0.5 text-xs font-medium ${m.up ? 'text-green-400' : 'text-red-400'}`}>
                   {m.up ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
                   {m.change}
                 </div>
               </div>
-              <p className="text-2xl font-semibold text-white font-mono">{m.value}</p>
-              <p className="text-xs text-[#71717a] mt-1">{m.label}</p>
+              <p className="text-2xl font-semibold font-mono" style={{ color: 'var(--text-primary)' }}>{m.value}</p>
+              <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>{m.label}</p>
             </div>
           );
         })}
@@ -65,8 +65,8 @@ export default function Overview() {
       <div className="card p-5">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h2 className="text-sm font-semibold text-white">Traffic Volume</h2>
-            <p className="text-xs text-[#71717a] mt-0.5">Requests by decision — Last 24 hours</p>
+            <h2 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Traffic Volume</h2>
+            <p className="text-xs mt-0.5" style={{ color: 'var(--text-muted)' }}>Requests by decision — Last 24 hours</p>
           </div>
           <div className="flex gap-1">
             <button className="btn-secondary text-xs py-1">24h</button>
@@ -111,10 +111,10 @@ export default function Overview() {
 
       {/* Top Offenders */}
       <div className="card overflow-hidden">
-        <div className="flex items-center justify-between px-5 py-4 border-b" style={{ borderColor: '#1f1f1f' }}>
+        <div className="flex items-center justify-between px-5 py-4 border-b" style={{ borderColor: 'var(--border-primary)' }}>
           <div>
-            <h2 className="text-sm font-semibold text-white">Top Offenders</h2>
-            <p className="text-xs text-[#71717a] mt-0.5">IPs with the most blocked requests</p>
+            <h2 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Top Offenders</h2>
+            <p className="text-xs mt-0.5" style={{ color: 'var(--text-muted)' }}>IPs with the most blocked requests</p>
           </div>
           <button className="btn-secondary text-xs">View All</button>
         </div>
@@ -133,14 +133,14 @@ export default function Overview() {
             <tbody>
               {topOffenders.map((o, i) => (
                 <tr key={i}>
-                  <td className="font-mono text-white text-xs">{o.ip}</td>
+                  <td className="font-mono text-xs" style={{ color: 'var(--text-primary)' }}>{o.ip}</td>
                   <td className="font-mono text-xs" style={{ maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{o.ja4}</td>
                   <td className="text-xs">{o.asn}</td>
                   <td>
                     <span className="badge badge-gray">{o.geo}</span>
                   </td>
                   <td className="font-mono text-xs text-red-400">{o.blocked.toLocaleString()}</td>
-                  <td className="text-xs text-[#71717a]">{o.lastSeen}</td>
+                  <td className="text-xs" style={{ color: 'var(--text-muted)' }}>{o.lastSeen}</td>
                 </tr>
               ))}
             </tbody>

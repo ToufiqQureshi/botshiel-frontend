@@ -66,8 +66,8 @@ export default function EvidenceLogs() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-semibold text-white">Evidence Logs</h1>
-          <p className="text-sm text-[#71717a]">Real-time telemetry of all inspected requests</p>
+          <h1 className="text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>Evidence Logs</h1>
+          <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Real-time telemetry of all inspected requests</p>
         </div>
         <div className="flex gap-2">
           <button className="btn-secondary text-xs flex items-center gap-1.5">
@@ -81,14 +81,14 @@ export default function EvidenceLogs() {
       <div className="card p-3">
         <div className="flex flex-col md:flex-row gap-3">
           <div className="flex-1 relative">
-            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#71717a]" />
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: 'var(--text-muted)' }} />
             <input
               type="text"
               placeholder="Search by IP, JA4 fingerprint, or path..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-sm rounded-md text-white placeholder-[#71717a] focus:outline-none focus:ring-1 focus:ring-[#3f3f46]"
-              style={{ background: '#111', border: '1px solid #262626' }}
+              className="w-full pl-9 pr-3 py-2 text-sm rounded-md focus:outline-none focus:ring-1"
+              style={{ background: 'var(--input-bg)', border: '1px solid var(--border-secondary)', color: 'var(--text-primary)' }}
             />
           </div>
           <div className="flex gap-2">
@@ -96,17 +96,17 @@ export default function EvidenceLogs() {
               <select
                 value={decisionFilter}
                 onChange={(e) => setDecisionFilter(e.target.value)}
-                className="appearance-none pl-3 pr-8 py-2 text-sm rounded-md text-white focus:outline-none cursor-pointer"
-                style={{ background: '#111', border: '1px solid #262626' }}
+                className="appearance-none pl-3 pr-8 py-2 text-sm rounded-md focus:outline-none cursor-pointer"
+                style={{ background: 'var(--input-bg)', border: '1px solid var(--border-secondary)', color: 'var(--text-primary)' }}
               >
                 <option value="ALL">All Decisions</option>
                 {decisions.map(d => <option key={d} value={d}>{d}</option>)}
               </select>
-              <Filter size={12} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#71717a] pointer-events-none" />
+              <Filter size={12} className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: 'var(--text-muted)' }} />
             </div>
             <select
-              className="appearance-none pl-3 pr-8 py-2 text-sm rounded-md text-white focus:outline-none cursor-pointer"
-              style={{ background: '#111', border: '1px solid #262626' }}
+              className="appearance-none pl-3 pr-8 py-2 text-sm rounded-md focus:outline-none cursor-pointer"
+              style={{ background: 'var(--input-bg)', border: '1px solid var(--border-secondary)', color: 'var(--text-primary)' }}
             >
               <option>Last 1 hour</option>
               <option>Last 6 hours</option>
@@ -148,7 +148,7 @@ export default function EvidenceLogs() {
             </tbody>
           </table>
         </div>
-        <div className="px-4 py-3 border-t flex items-center justify-between text-xs text-[#71717a]" style={{ borderColor: '#1f1f1f' }}>
+        <div className="px-4 py-3 border-t flex items-center justify-between text-xs" style={{ borderColor: 'var(--border-primary)', color: 'var(--text-muted)' }}>
           <span>Showing {Math.min(50, filteredLogs.length)} of {filteredLogs.length} entries</span>
           <div className="flex gap-1">
             <button className="btn-secondary text-xs py-1 px-2">Previous</button>
@@ -164,20 +164,20 @@ function LogRow({ log, expanded, onToggle }: { log: any; expanded: boolean; onTo
   return (
     <>
       <tr onClick={onToggle} className="cursor-pointer">
-        <td className="text-xs font-mono text-[#a1a1aa]">{new Date(log.timestamp).toLocaleTimeString()}</td>
+        <td className="text-xs font-mono" style={{ color: 'var(--text-secondary)' }}>{new Date(log.timestamp).toLocaleTimeString()}</td>
         <td>
           <div className="flex items-center gap-1.5">
             <span className="badge badge-gray text-[10px]">{log.method}</span>
-            <span className="text-xs text-white font-mono">{log.path}</span>
+            <span className="text-xs font-mono" style={{ color: 'var(--text-primary)' }}>{log.path}</span>
           </div>
         </td>
         <td>
           <div className="flex items-center gap-1.5">
-            <span className="text-xs font-mono text-white">{log.ip}</span>
+            <span className="text-xs font-mono" style={{ color: 'var(--text-primary)' }}>{log.ip}</span>
             <span className="badge badge-gray text-[10px]">{log.geo}</span>
           </div>
         </td>
-        <td className="font-mono text-[10px] text-[#a1a1aa]" style={{ maxWidth: '180px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+        <td className="font-mono text-[10px]" style={{ maxWidth: '180px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: 'var(--text-secondary)' }}>
           {log.ja4}
         </td>
         <td>
@@ -186,7 +186,7 @@ function LogRow({ log, expanded, onToggle }: { log: any; expanded: boolean; onTo
               <span key={i} className="badge badge-red text-[10px]">{s}</span>
             ))}
             {log.signals.length > 2 && (
-              <span className="text-[10px] text-[#71717a]">+{log.signals.length - 2}</span>
+              <span className="text-[10px]" style={{ color: 'var(--text-muted)' }}>+{log.signals.length - 2}</span>
             )}
           </div>
         </td>
@@ -200,31 +200,31 @@ function LogRow({ log, expanded, onToggle }: { log: any; expanded: boolean; onTo
       {expanded && (
         <tr>
           <td colSpan={7} className="p-0">
-            <div className="px-4 py-3 grid md:grid-cols-2 gap-4" style={{ background: '#0a0a0a' }}>
+            <div className="px-4 py-3 grid md:grid-cols-2 gap-4" style={{ background: 'var(--code-bg)' }}>
               <div>
-                <h4 className="text-xs font-medium text-[#71717a] mb-2 uppercase tracking-wider">HTTP Headers</h4>
-                <div className="rounded p-3 font-mono text-[11px] space-y-1" style={{ background: '#111', border: '1px solid #1f1f1f' }}>
+                <h4 className="text-xs font-medium mb-2 uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>HTTP Headers</h4>
+                <div className="rounded p-3 font-mono text-[11px] space-y-1" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
                   {Object.entries(log.headers).map(([key, value]) => (
                     <div key={key}>
                       <span className="text-blue-400">{key}</span>
-                      <span className="text-[#71717a]">: </span>
-                      <span className="text-[#a1a1aa]">{value as string}</span>
+                      <span style={{ color: 'var(--text-muted)' }}>: </span>
+                      <span style={{ color: 'var(--text-secondary)' }}>{value as string}</span>
                     </div>
                   ))}
                 </div>
               </div>
               <div>
-                <h4 className="text-xs font-medium text-[#71717a] mb-2 uppercase tracking-wider">TLS Handshake</h4>
-                <div className="rounded p-3 font-mono text-[11px] space-y-1" style={{ background: '#111', border: '1px solid #1f1f1f' }}>
+                <h4 className="text-xs font-medium mb-2 uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>TLS Handshake</h4>
+                <div className="rounded p-3 font-mono text-[11px] space-y-1" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
                   {Object.entries(log.tls).map(([key, value]) => (
                     <div key={key}>
                       <span className="text-green-400">{key}</span>
-                      <span className="text-[#71717a]">: </span>
-                      <span className="text-[#a1a1aa]">{value as string}</span>
+                      <span style={{ color: 'var(--text-muted)' }}>: </span>
+                      <span style={{ color: 'var(--text-secondary)' }}>{value as string}</span>
                     </div>
                   ))}
-                  <div className="pt-2 mt-2 border-t" style={{ borderColor: '#1f1f1f' }}>
-                    <span className="text-[#71717a]">JA4: </span>
+                  <div className="pt-2 mt-2 border-t" style={{ borderColor: 'var(--border-primary)' }}>
+                    <span style={{ color: 'var(--text-muted)' }}>JA4: </span>
                     <span className="text-yellow-400">{log.ja4}</span>
                   </div>
                 </div>
