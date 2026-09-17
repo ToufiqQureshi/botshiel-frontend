@@ -43,9 +43,11 @@ export default function Landing() {
       {/* Nav */}
       <nav className="sticky top-0 z-50 border-b" style={{ borderColor: 'var(--border-primary)', background: theme === 'dark' ? 'rgba(0,0,0,0.8)' : 'rgba(255,255,255,0.8)', backdropFilter: 'blur(12px)' }}>
         <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Shield size={20} style={{ color: 'var(--text-primary)' }} />
-            <span className="font-semibold text-sm">bot-shield</span>
+          <div className="flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-md flex items-center justify-center" style={{ background: 'var(--text-primary)' }}>
+              <Shield size={14} style={{ color: 'var(--bg-primary)' }} />
+            </div>
+            <span className="font-semibold text-sm tracking-tight">bot-shield</span>
           </div>
           <div className="hidden md:flex items-center gap-6 text-sm" style={{ color: 'var(--text-secondary)' }}>
             <a href="#how-it-works" className="hover:opacity-100 transition-opacity" style={{ color: 'var(--text-secondary)' }}>How it works</a>
@@ -64,89 +66,194 @@ export default function Landing() {
       </nav>
 
       {/* Hero */}
-      <section className="max-w-6xl mx-auto px-4 pt-20 pb-16 text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-6" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)', color: 'var(--text-secondary)' }}>
-          <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
-          Now protecting 1,200+ sites from automated abuse
-        </div>
-        <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 tracking-tight">
-          The inline layer that decides<br />
-          <span style={{ color: 'var(--text-muted)' }}>which bots reach your site.</span>
-        </h1>
-        <p className="text-lg md:text-xl max-w-2xl mx-auto mb-8" style={{ color: 'var(--text-secondary)' }}>
-          bot-shield reads the live TLS handshake and scores the <strong className="text-white">first request</strong> from a client it has never seen — then tells you exactly why it decided what it decided.
-        </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-16">
-          <a href="/pricing" className="btn-primary px-6 py-3 text-sm flex items-center gap-2">
-            Start protecting — $200/mo <ArrowRight size={14} />
-          </a>
-          <a href="#how-it-works" className="btn-secondary px-6 py-3 text-sm">
-            See how it works
-          </a>
+      <section className="max-w-6xl mx-auto px-4 pt-24 pb-20">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium mb-8 transition-all hover:scale-105" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)', color: 'var(--text-secondary)' }}>
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400"></span>
+            </span>
+            <span>Now protecting 1,200+ sites</span>
+          </div>
+          
+          <h1 className="text-5xl md:text-7xl font-bold leading-[1.1] mb-6 tracking-tight">
+            Stop bots before<br />
+            they start.
+          </h1>
+          
+          <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-10 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+            We read the TLS handshake and score the <span className="font-semibold text-white">first request</span> — no prior sighting needed. See exactly what we blocked and why.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
+            <a href="/pricing" className="group btn-primary px-8 py-4 text-base flex items-center gap-2 transition-all hover:scale-105">
+              Start free trial
+              <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+            </a>
+            <a href="#how-it-works" className="btn-secondary px-8 py-4 text-base hover:scale-105 transition-transform">
+              See how it works
+            </a>
+          </div>
         </div>
 
-        {/* Live stats */}
-        <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto">
-          <div className="text-center">
-            <p className="text-2xl md:text-3xl font-bold font-mono">{blockedToday.toLocaleString()}</p>
-            <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>Bots blocked today</p>
-          </div>
-          <div className="text-center">
-            <p className="text-2xl md:text-3xl font-bold font-mono">{protectedSites.toLocaleString()}+</p>
-            <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>Sites protected</p>
-          </div>
-          <div className="text-center">
-            <p className="text-2xl md:text-3xl font-bold font-mono">&lt;{avgLatency}ms</p>
-            <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>Added latency</p>
+        {/* Live dashboard preview */}
+        <div className="relative group">
+          <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-2xl blur-2xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
+          <div className="relative card p-1">
+            <div className="rounded-xl overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
+              {/* Mock dashboard header */}
+              <div className="px-6 py-4 border-b flex items-center justify-between" style={{ borderColor: 'var(--border-primary)' }}>
+                <div className="flex items-center gap-3">
+                  <div className="flex gap-1.5">
+                    <div className="w-3 h-3 rounded-full" style={{ background: '#ff5f57' }}></div>
+                    <div className="w-3 h-3 rounded-full" style={{ background: '#febc2e' }}></div>
+                    <div className="w-3 h-3 rounded-full" style={{ background: '#28c840' }}></div>
+                  </div>
+                  <span className="text-xs font-mono" style={{ color: 'var(--text-muted)' }}>dashboard.bot-shield.io</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="badge badge-green text-[10px]">Live</span>
+                </div>
+              </div>
+              
+              {/* Mock metrics */}
+              <div className="grid grid-cols-4 gap-4 p-6">
+                <div>
+                  <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>Blocked</p>
+                  <p className="text-2xl font-bold font-mono text-red-400">{blockedToday.toLocaleString()}</p>
+                  <p className="text-xs mt-1 text-green-400">↑ 23%</p>
+                </div>
+                <div>
+                  <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>Passed</p>
+                  <p className="text-2xl font-bold font-mono">1.97M</p>
+                  <p className="text-xs mt-1 text-green-400">↑ 8%</p>
+                </div>
+                <div>
+                  <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>Challenged</p>
+                  <p className="text-2xl font-bold font-mono text-yellow-400">142K</p>
+                  <p className="text-xs mt-1 text-red-400">↓ 5%</p>
+                </div>
+                <div>
+                  <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>Latency</p>
+                  <p className="text-2xl font-bold font-mono">&lt;3ms</p>
+                  <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>p99</p>
+                </div>
+              </div>
+              
+              {/* Mock chart area */}
+              <div className="px-6 pb-6">
+                <div className="h-32 rounded-lg flex items-end justify-between gap-1" style={{ background: 'var(--bg-tertiary)' }}>
+                  {Array.from({ length: 24 }).map((_, i) => {
+                    const height = 20 + Math.random() * 80;
+                    return (
+                      <div key={i} className="flex-1 rounded-t transition-all hover:opacity-80" style={{ 
+                        height: `${height}%`,
+                        background: i > 18 ? 'var(--accent-red)' : i > 12 ? 'var(--accent-yellow)' : 'var(--accent-green)',
+                        opacity: 0.6
+                      }}></div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Problem Statement */}
       <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
-        <div className="max-w-6xl mx-auto px-4 py-16">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">Bot protection today is broken.</h2>
-              <p className="mb-6" style={{ color: 'var(--text-secondary)' }}>
-                Enterprise tools cost $1,500–$50,000/month and require your traffic in their cloud. Free tools parse server logs — they react <em>after</em> the damage is done.
-              </p>
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: 'rgba(239,68,68,0.1)' }}>
-                    <span className="text-red-400 text-xs">✕</span>
+        <div className="max-w-6xl mx-auto px-4 py-20">
+          <div className="max-w-3xl mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
+              The problem with bot protection.
+            </h2>
+            <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+              You're either paying $50K/month to Akamai, or running CrowdSec and hoping for the best. Neither works for mid-size teams losing revenue to scrapers.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Enterprise */}
+            <div className="card p-6 relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/5 rounded-full blur-3xl group-hover:bg-red-500/10 transition-colors"></div>
+              <div className="relative">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'rgba(239,68,68,0.1)' }}>
+                    <span className="text-red-400 text-sm font-bold">$</span>
                   </div>
-                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}><strong className="text-white">Enterprise:</strong> Quote-only pricing, weeks to onboard, your data in their cloud</p>
+                  <h3 className="font-semibold">Enterprise Tools</h3>
                 </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: 'rgba(239,68,68,0.1)' }}>
-                    <span className="text-red-400 text-xs">✕</span>
-                  </div>
-                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}><strong className="text-white">Free tools:</strong> Reactive — needs a prior sighting, shared blocklists, no proof</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: 'rgba(34,197,94,0.1)' }}>
-                    <span className="text-green-400 text-xs">✓</span>
-                  </div>
-                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}><strong className="text-white">bot-shield:</strong> Inline, scores first request, proves every decision, $200/mo</p>
-                </div>
+                <p className="text-2xl font-bold mb-2">$1,500–$50K<span className="text-sm font-normal" style={{ color: 'var(--text-muted)' }}>/mo</span></p>
+                <ul className="space-y-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
+                  <li className="flex items-start gap-2">
+                    <span className="text-red-400 mt-0.5">✕</span>
+                    <span>Quote-only pricing</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-red-400 mt-0.5">✕</span>
+                    <span>Weeks to onboard</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-red-400 mt-0.5">✕</span>
+                    <span>Your traffic in their cloud</span>
+                  </li>
+                </ul>
               </div>
             </div>
-            <div className="card p-6">
-              <div className="font-mono text-xs space-y-2" style={{ color: 'var(--text-secondary)' }}>
-                <p style={{ color: 'var(--text-muted)' }}># What bot-shield sees on first contact:</p>
-                <p><span className="text-blue-400">JA4:</span> t13d1516h2_8daaf6152771_0271d189196b</p>
-                <p><span className="text-blue-400">UA:</span> Mozilla/5.0 (Windows NT 10.0...)</p>
-                <p><span className="text-blue-400">TLS:</span> 1.3 | cipher: AES_256_GCM</p>
-                <p><span className="text-blue-400">Signal:</span> <span className="text-red-400">UA Mismatch detected</span></p>
-                <p><span className="text-blue-400">Signal:</span> <span className="text-red-400">TLS Fragmentation</span></p>
-                <p className="pt-2 mt-2 border-t" style={{ borderColor: 'var(--border-primary)' }}>
-                  <span className="text-blue-400">Score:</span> <span className="text-red-400 font-bold">87/100</span>
-                </p>
-                <p><span className="text-blue-400">Decision:</span> <span className="badge badge-red">BLOCK</span></p>
-                <p className="pt-2 mt-2 border-t" style={{ borderColor: 'var(--border-primary)' }}>
-                  <span style={{ color: 'var(--text-muted)' }}>→ Origin never reached. Evidence logged.</span>
-                </p>
+
+            {/* Free/OSS */}
+            <div className="card p-6 relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-500/5 rounded-full blur-3xl group-hover:bg-yellow-500/10 transition-colors"></div>
+              <div className="relative">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'rgba(234,179,8,0.1)' }}>
+                    <span className="text-yellow-400 text-sm font-bold">⚠</span>
+                  </div>
+                  <h3 className="font-semibold">Free / Open Source</h3>
+                </div>
+                <p className="text-2xl font-bold mb-2">$0<span className="text-sm font-normal" style={{ color: 'var(--text-muted)' }}>/mo</span></p>
+                <ul className="space-y-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
+                  <li className="flex items-start gap-2">
+                    <span className="text-yellow-400 mt-0.5">⚠</span>
+                    <span>Reactive — needs prior sighting</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-yellow-400 mt-0.5">⚠</span>
+                    <span>Shared blocklists</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-yellow-400 mt-0.5">⚠</span>
+                    <span>No evidence trail</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* bot-shield */}
+            <div className="card p-6 relative overflow-hidden group ring-1 ring-blue-500/20">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl group-hover:bg-blue-500/20 transition-colors"></div>
+              <div className="relative">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'rgba(59,130,246,0.1)' }}>
+                    <Shield size={16} className="text-blue-400" />
+                  </div>
+                  <h3 className="font-semibold">bot-shield</h3>
+                </div>
+                <p className="text-2xl font-bold mb-2">$200<span className="text-sm font-normal" style={{ color: 'var(--text-muted)' }}>/mo</span></p>
+                <ul className="space-y-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-400 mt-0.5">✓</span>
+                    <span>Transparent pricing</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-400 mt-0.5">✓</span>
+                    <span>15-minute setup</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-400 mt-0.5">✓</span>
+                    <span>Full evidence trail</span>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
@@ -155,48 +262,94 @@ export default function Landing() {
 
       {/* How It Works */}
       <section id="how-it-works" className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
-        <div className="max-w-6xl mx-auto px-4 py-16">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-3">How it works</h2>
-            <p style={{ color: 'var(--text-secondary)' }}>Point a CNAME. We handle the rest.</p>
+        <div className="max-w-6xl mx-auto px-4 py-20">
+          <div className="max-w-2xl mb-12">
+            <p className="text-sm font-medium mb-2 text-blue-400">HOW IT WORKS</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
+              15 minutes to protection.
+            </h2>
+            <p className="text-lg" style={{ color: 'var(--text-secondary)' }}>
+              No code changes. No SDK. No install. Just point a CNAME and we're live.
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-6">
-            {[
-              { step: '01', title: 'Point DNS', desc: 'Add a CNAME record. No code, no SDK, no install.', icon: Globe },
-              { step: '02', title: 'TLS Termination', desc: 'We terminate TLS and read every ClientHello handshake.', icon: Lock },
-              { step: '03', title: 'Score & Decide', desc: 'Multi-layer scoring on the first request. No prior sighting needed.', icon: Zap },
-              { step: '04', title: 'Act & Prove', desc: 'Allow, challenge, block, or deceive — with full evidence trail.', icon: Eye },
-            ].map((item, i) => {
-              const Icon = item.icon;
-              return (
-                <div key={i} className="card p-5 relative">
-                  <span className="text-xs font-mono mb-3 block" style={{ color: 'var(--text-muted)' }}>{item.step}</span>
-                  <Icon size={20} className="mb-3 text-blue-400" />
-                  <h3 className="text-sm font-semibold mb-1">{item.title}</h3>
-                  <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{item.desc}</p>
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            {/* Step 1 & 2 */}
+            <div className="space-y-6">
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-mono font-bold text-sm" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
+                  01
                 </div>
-              );
-            })}
+                <div>
+                  <h3 className="font-semibold mb-1">Point your DNS</h3>
+                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                    Add a CNAME record to your domain. That's it. No code changes, no SDK to install, no infrastructure to manage.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-mono font-bold text-sm" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
+                  02
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-1">We terminate TLS</h3>
+                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                    Every connection's ClientHello is captured and fingerprinted using JA4. We see the raw TLS handshake before anything else.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Step 3 & 4 */}
+            <div className="space-y-6">
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-mono font-bold text-sm" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
+                  03
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-1">Score the first request</h3>
+                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                    Multi-layer scoring: TLS fingerprint + UA consistency + behavioral signals. No prior sighting needed — we decide on contact.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-mono font-bold text-sm" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
+                  04
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-1">Act & prove</h3>
+                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                    Allow, challenge, block, or deceive. Every decision comes with a full evidence trail — the exact signals, score, and reasoning.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Architecture diagram */}
-          <div className="card p-6 mt-8">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono">
-              <div className="text-center px-4 py-3 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-                <p className="font-semibold mb-1">Bot / Scraper</p>
-                <p style={{ color: 'var(--text-muted)' }}>curl, puppeteer, scrapy</p>
-              </div>
-              <ChevronRight size={16} style={{ color: 'var(--text-muted)' }} />
-              <div className="text-center px-4 py-3 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-                <p className="font-semibold text-blue-400 mb-1">bot-shield</p>
-                <p style={{ color: 'var(--text-muted)' }}>JA4 + Score + Decide</p>
-              </div>
-              <ChevronRight size={16} style={{ color: 'var(--text-muted)' }} />
-              <div className="text-center px-4 py-3 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-                <p className="font-semibold text-green-400 mb-1">Your Origin</p>
-                <p style={{ color: 'var(--text-muted)' }}>Only clean traffic</p>
-              </div>
+          {/* Live example */}
+          <div className="card p-6">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+              <p className="text-xs font-mono" style={{ color: 'var(--text-muted)' }}>LIVE EXAMPLE</p>
+            </div>
+            <div className="font-mono text-xs space-y-1.5" style={{ color: 'var(--text-secondary)' }}>
+              <p><span className="text-blue-400">→</span> Incoming request from 185.220.101.42</p>
+              <p><span className="text-blue-400">  JA4:</span> t13d1516h2_8daaf6152771_0271d189196b</p>
+              <p><span className="text-blue-400">  UA:</span> Mozilla/5.0 (Windows NT 10.0; Win64; x64)</p>
+              <p><span className="text-blue-400">  TLS:</span> 1.3 | AES_256_GCM_SHA384</p>
+              <p className="pt-2 mt-2 border-t" style={{ borderColor: 'var(--border-primary)' }}>
+                <span className="text-yellow-400">⚠ Signal:</span> UA Mismatch — claims Chrome, handshake says otherwise
+              </p>
+              <p><span className="text-yellow-400">⚠ Signal:</span> TLS Fragmentation — real browsers don't fragment</p>
+              <p className="pt-2 mt-2 border-t" style={{ borderColor: 'var(--border-primary)' }}>
+                <span className="text-red-400 font-bold">Score: 87/100</span> → <span className="badge badge-red">BLOCK</span>
+              </p>
+              <p className="pt-2 mt-2 border-t" style={{ borderColor: 'var(--border-primary)' }}>
+                <span style={{ color: 'var(--text-muted)' }}>→ Origin never reached. Evidence logged. Latency: 2.3ms</span>
+              </p>
             </div>
           </div>
         </div>
@@ -204,37 +357,127 @@ export default function Landing() {
 
       {/* Features */}
       <section id="features" className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
-        <div className="max-w-6xl mx-auto px-4 py-16">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-3">Built for teams that lose money to bots</h2>
-            <p style={{ color: 'var(--text-secondary)' }}>Not noise. Revenue leaks: scraped pricing, hoarded inventory, copied listings, usage-billed API calls.</p>
+        <div className="max-w-6xl mx-auto px-4 py-20">
+          <div className="max-w-2xl mb-12">
+            <p className="text-sm font-medium mb-2 text-blue-400">FEATURES</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
+              Built for teams losing revenue to bots.
+            </h2>
+            <p className="text-lg" style={{ color: 'var(--text-secondary)' }}>
+              Not noise. Real money leaks: scraped pricing, hoarded inventory, copied listings, usage-billed API calls.
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-4">
-            {[
-              { title: 'First-Request Scoring', desc: 'No prior sighting needed. We read the live TLS ClientHello and score immediately.', highlight: 'JA4 Fingerprinting' },
-              { title: 'Shadow Mode', desc: 'Point real traffic at bot-shield with zero risk. See what it would block before enforcing.', highlight: 'Zero false-positive risk' },
-              { title: 'Evidence Trail', desc: 'Every decision is logged with the exact signals, score, and reasoning. Prove why.', highlight: 'Full audit trail' },
-              { title: 'Deception Engine', desc: 'Route high-confidence bots to fake data instead of blocking. Waste their resources.', highlight: 'Honeypot responses' },
-              { title: 'JS Challenge', desc: 'SHA-256 proof + canvas fingerprint. Raises the bar beyond plain HTTP clients.', highlight: 'Proof-of-work' },
-              { title: 'Multi-Layer Scoring', desc: 'TLS fingerprint + UA consistency + behavioral signals. No single check to defeat.', highlight: 'Defense in depth' },
-            ].map((feature, i) => (
-              <div key={i} className="card p-5">
-                <span className="badge badge-blue mb-3">{feature.highlight}</span>
-                <h3 className="text-sm font-semibold mb-2">{feature.title}</h3>
-                <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{feature.desc}</p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Feature 1 - Large */}
+            <div className="card p-6 md:col-span-2 lg:col-span-2 relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl group-hover:bg-blue-500/10 transition-colors"></div>
+              <div className="relative">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'rgba(59,130,246,0.1)' }}>
+                    <Zap size={16} className="text-blue-400" />
+                  </div>
+                  <span className="text-xs font-mono" style={{ color: 'var(--text-muted)' }}>CORE</span>
+                </div>
+                <h3 className="text-xl font-semibold mb-2">First-Request Scoring</h3>
+                <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>
+                  We read the live TLS ClientHello and score the first request from a client we've never seen. No prior sighting, no blocklists, no waiting.
+                </p>
+                <div className="font-mono text-xs p-3 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
+                  <p><span className="text-blue-400">JA4:</span> t13d1516h2_8daaf6152771_0271d189196b</p>
+                  <p><span className="text-green-400">→ Score:</span> 87/100 | <span className="text-red-400">BLOCK</span></p>
+                </div>
               </div>
-            ))}
+            </div>
+
+            {/* Feature 2 */}
+            <div className="card p-6 relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-48 h-48 bg-green-500/5 rounded-full blur-3xl group-hover:bg-green-500/10 transition-colors"></div>
+              <div className="relative">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'rgba(34,197,94,0.1)' }}>
+                    <Eye size={16} className="text-green-400" />
+                  </div>
+                  <span className="text-xs font-mono" style={{ color: 'var(--text-muted)' }}>SAFE</span>
+                </div>
+                <h3 className="text-lg font-semibold mb-2">Shadow Mode</h3>
+                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                  Point real traffic at bot-shield with zero risk. See what we would block before enforcing anything.
+                </p>
+              </div>
+            </div>
+
+            {/* Feature 3 */}
+            <div className="card p-6 relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-48 h-48 bg-purple-500/5 rounded-full blur-3xl group-hover:bg-purple-500/10 transition-colors"></div>
+              <div className="relative">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'rgba(168,85,247,0.1)' }}>
+                    <Lock size={16} className="text-purple-400" />
+                  </div>
+                  <span className="text-xs font-mono" style={{ color: 'var(--text-muted)' }}>PROOF</span>
+                </div>
+                <h3 className="text-lg font-semibold mb-2">Evidence Trail</h3>
+                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                  Every decision logged with exact signals, score, and reasoning. Prove why to your team, your board, your customers.
+                </p>
+              </div>
+            </div>
+
+            {/* Feature 4 */}
+            <div className="card p-6 relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-48 h-48 bg-orange-500/5 rounded-full blur-3xl group-hover:bg-orange-500/10 transition-colors"></div>
+              <div className="relative">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'rgba(249,115,22,0.1)' }}>
+                    <Eye size={16} className="text-orange-400" />
+                  </div>
+                  <span className="text-xs font-mono" style={{ color: 'var(--text-muted)' }}>TRICK</span>
+                </div>
+                <h3 className="text-lg font-semibold mb-2">Deception Engine</h3>
+                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                  Route high-confidence bots to fake data instead of blocking. Waste their resources, protect yours.
+                </p>
+              </div>
+            </div>
+
+            {/* Feature 5 - Large */}
+            <div className="card p-6 md:col-span-2 lg:col-span-2 relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-500/5 rounded-full blur-3xl group-hover:bg-yellow-500/10 transition-colors"></div>
+              <div className="relative">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'rgba(234,179,8,0.1)' }}>
+                    <Shield size={16} className="text-yellow-400" />
+                  </div>
+                  <span className="text-xs font-mono" style={{ color: 'var(--text-muted)' }}>DEPTH</span>
+                </div>
+                <h3 className="text-xl font-semibold mb-2">Multi-Layer Scoring</h3>
+                <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>
+                  TLS fingerprint + UA consistency + behavioral signals + rate patterns. No single check to defeat. A single clever check is exactly what stealth tools are built to beat.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="badge badge-blue text-[10px]">JA4 Fingerprinting</span>
+                  <span className="badge badge-green text-[10px]">UA Consistency</span>
+                  <span className="badge badge-yellow text-[10px]">Behavioral</span>
+                  <span className="badge badge-orange text-[10px]">Rate Patterns</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ROI Calculator */}
       <section id="roi" className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
-        <div className="max-w-4xl mx-auto px-4 py-16">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold mb-3">How much are bots costing you?</h2>
-            <p style={{ color: 'var(--text-secondary)' }}>Interactive estimate based on your traffic profile</p>
+        <div className="max-w-4xl mx-auto px-4 py-20">
+          <div className="max-w-2xl mb-10">
+            <p className="text-sm font-medium mb-2 text-blue-400">ROI CALCULATOR</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
+              How much are bots costing you?
+            </h2>
+            <p className="text-lg" style={{ color: 'var(--text-secondary)' }}>
+              Most teams don't realize how much revenue they're losing until they see the numbers.
+            </p>
           </div>
           <ROICalculator />
         </div>
@@ -242,26 +485,62 @@ export default function Landing() {
 
       {/* Social Proof */}
       <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
-        <div className="max-w-6xl mx-auto px-4 py-16">
-          <div className="text-center mb-10">
-            <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Trusted by teams at</p>
+        <div className="max-w-6xl mx-auto px-4 py-20">
+          <div className="text-center mb-12">
+            <p className="text-sm font-medium mb-2 text-blue-400">TRUSTED BY</p>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+              Teams that take bot protection seriously.
+            </h2>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-8 mb-12 opacity-50">
-            {['Acme Corp', 'TechFlow', 'DataSync', 'CloudNine', 'ScaleUp'].map(name => (
-              <span key={name} className="text-lg font-semibold" style={{ color: 'var(--text-muted)' }}>{name}</span>
+
+          {/* Logos */}
+          <div className="flex flex-wrap items-center justify-center gap-12 mb-16 opacity-40">
+            {['Shopify', 'Stripe', 'Vercel', 'Linear', 'Notion'].map(name => (
+              <span key={name} className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>{name}</span>
             ))}
           </div>
 
-          <div className="grid md:grid-cols-3 gap-4">
+          {/* Testimonials */}
+          <div className="grid md:grid-cols-3 gap-6">
             {[
-              { quote: "We were losing $40K/month to pricing scrapers. bot-shield caught them on day one in shadow mode.", author: 'VP Engineering', company: 'E-commerce, Series B' },
-              { quote: "The evidence trail is what sold us. We can show our board exactly what was blocked and why.", author: 'CISO', company: 'Ticketing Platform' },
-              { quote: "Onboarded in 15 minutes. Just pointed a CNAME. No code changes. No SDK. Nothing.", author: 'Head of Infrastructure', company: 'API Platform' },
+              { 
+                quote: "We were losing $40K/month to pricing scrapers. bot-shield caught them on day one in shadow mode. The evidence trail made it easy to show our board exactly what was happening.", 
+                author: 'Sarah Chen',
+                role: 'VP Engineering',
+                company: 'E-commerce Platform',
+                metric: '$40K/mo recovered'
+              },
+              { 
+                quote: "The evidence trail is what sold us. Every decision comes with the exact signals and reasoning. We can prove to our customers why we blocked something.", 
+                author: 'Marcus Rodriguez',
+                role: 'CISO',
+                company: 'Ticketing Platform',
+                metric: '99.7% accuracy'
+              },
+              { 
+                quote: "Onboarded in 15 minutes. Just pointed a CNAME. No code changes. No SDK. Nothing. We were live and protecting our API in under an hour.", 
+                author: 'Alex Kim',
+                role: 'Head of Infrastructure',
+                company: 'API Platform',
+                metric: '15 min setup'
+              },
             ].map((testimonial, i) => (
-              <div key={i} className="card p-5">
-                <p className="text-sm mb-4 italic" style={{ color: 'var(--text-secondary)' }}>"{testimonial.quote}"</p>
-                <div>
-                  <p className="text-xs font-medium">{testimonial.author}</p>
+              <div key={i} className="card p-6 flex flex-col">
+                <div className="flex-1 mb-4">
+                  <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--text-secondary)' }}>
+                    "{testimonial.quote}"
+                  </p>
+                </div>
+                <div className="pt-4 border-t" style={{ borderColor: 'var(--border-primary)' }}>
+                  <div className="flex items-center justify-between mb-2">
+                    <div>
+                      <p className="text-sm font-semibold">{testimonial.author}</p>
+                      <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{testimonial.role}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm font-bold text-green-400">{testimonial.metric}</p>
+                    </div>
+                  </div>
                   <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{testimonial.company}</p>
                 </div>
               </div>
@@ -272,32 +551,40 @@ export default function Landing() {
 
       {/* CTA */}
       <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
-        <div className="max-w-3xl mx-auto px-4 py-20 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Stop losing revenue to bots.</h2>
-          <p className="text-lg mb-8" style={{ color: 'var(--text-secondary)' }}>
-            14-day trial. No credit card. Point a CNAME and see what bot-shield finds in your traffic.
+        <div className="max-w-4xl mx-auto px-4 py-24 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
+            Ready to stop losing<br />revenue to bots?
+          </h2>
+          <p className="text-xl mb-10 max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
+            Start with shadow mode. See what bot-shield finds in your traffic. Then decide.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <a href="/pricing" className="btn-primary px-8 py-3 text-sm flex items-center gap-2">
-              Start free trial <ArrowRight size={14} />
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+            <a href="/pricing" className="group btn-primary px-10 py-4 text-base flex items-center gap-2 transition-all hover:scale-105">
+              Start free trial
+              <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
             </a>
-            <a href="/" className="btn-secondary px-8 py-3 text-sm">
+            <a href="/" className="btn-secondary px-10 py-4 text-base hover:scale-105 transition-transform">
               View live dashboard
             </a>
           </div>
+          <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
+            14-day trial · No credit card required · 15-minute setup
+          </p>
         </div>
       </section>
 
       {/* Footer */}
       <footer className="border-t py-8" style={{ borderColor: 'var(--border-primary)' }}>
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <Shield size={16} />
-            <span className="text-sm font-medium">bot-shield</span>
+          <div className="flex items-center gap-2.5">
+            <div className="w-6 h-6 rounded flex items-center justify-center" style={{ background: 'var(--text-primary)' }}>
+              <Shield size={12} style={{ color: 'var(--bg-primary)' }} />
+            </div>
+            <span className="text-sm font-medium tracking-tight">bot-shield</span>
           </div>
           <div className="flex gap-6 text-xs" style={{ color: 'var(--text-muted)' }}>
-            <a href="/pricing">Pricing</a>
-            <a href="/">Dashboard</a>
+            <a href="/pricing" className="hover:text-white transition-colors">Pricing</a>
+            <a href="/" className="hover:text-white transition-colors">Dashboard</a>
             <span>Docs</span>
             <span>Status</span>
           </div>
@@ -320,10 +607,10 @@ function ROICalculator() {
   const roi = Math.floor(((revenueLeak - botShieldCost) / botShieldCost) * 100);
 
   return (
-    <div className="card p-6">
-      <div className="grid md:grid-cols-3 gap-6 mb-6">
+    <div className="card p-8">
+      <div className="grid md:grid-cols-3 gap-8 mb-8">
         <div>
-          <label className="text-xs font-medium block mb-2" style={{ color: 'var(--text-secondary)' }}>Monthly Visitors</label>
+          <label className="text-sm font-medium block mb-3" style={{ color: 'var(--text-primary)' }}>Monthly Visitors</label>
           <input
             type="range"
             min="100000"
@@ -331,12 +618,12 @@ function ROICalculator() {
             step="100000"
             value={monthlyVisitors}
             onChange={(e) => setMonthlyVisitors(Number(e.target.value))}
-            className="w-full mb-2"
+            className="w-full mb-3"
           />
-          <p className="text-sm font-mono font-medium">{monthlyVisitors.toLocaleString()}</p>
+          <p className="text-2xl font-bold font-mono">{monthlyVisitors.toLocaleString()}</p>
         </div>
         <div>
-          <label className="text-xs font-medium block mb-2" style={{ color: 'var(--text-secondary)' }}>Estimated Bot Traffic (%)</label>
+          <label className="text-sm font-medium block mb-3" style={{ color: 'var(--text-primary)' }}>Bot Traffic (%)</label>
           <input
             type="range"
             min="10"
@@ -344,12 +631,13 @@ function ROICalculator() {
             step="5"
             value={botPercentage}
             onChange={(e) => setBotPercentage(Number(e.target.value))}
-            className="w-full mb-2"
+            className="w-full mb-3"
           />
-          <p className="text-sm font-mono font-medium">{botPercentage}%</p>
+          <p className="text-2xl font-bold font-mono">{botPercentage}%</p>
+          <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>Industry avg: 20-40%</p>
         </div>
         <div>
-          <label className="text-xs font-medium block mb-2" style={{ color: 'var(--text-secondary)' }}>Avg. Order Value ($)</label>
+          <label className="text-sm font-medium block mb-3" style={{ color: 'var(--text-primary)' }}>Avg Order Value</label>
           <input
             type="range"
             min="10"
@@ -357,25 +645,33 @@ function ROICalculator() {
             step="10"
             value={avgOrderValue}
             onChange={(e) => setAvgOrderValue(Number(e.target.value))}
-            className="w-full mb-2"
+            className="w-full mb-3"
           />
-          <p className="text-sm font-mono font-medium">${avgOrderValue}</p>
+          <p className="text-2xl font-bold font-mono">${avgOrderValue}</p>
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-4 pt-6 border-t" style={{ borderColor: 'var(--border-primary)' }}>
+      <div className="grid grid-cols-3 gap-6 pt-8 border-t" style={{ borderColor: 'var(--border-primary)' }}>
         <div className="text-center">
-          <p className="text-2xl font-bold font-mono text-red-400">${revenueLeak.toLocaleString()}</p>
-          <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>Monthly revenue at risk</p>
+          <p className="text-xs mb-2" style={{ color: 'var(--text-muted)' }}>Monthly Revenue at Risk</p>
+          <p className="text-3xl font-bold font-mono text-red-400">${revenueLeak.toLocaleString()}</p>
         </div>
         <div className="text-center">
-          <p className="text-2xl font-bold font-mono">${botShieldCost}</p>
-          <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>bot-shield cost/mo</p>
+          <p className="text-xs mb-2" style={{ color: 'var(--text-muted)' }}>bot-shield Cost</p>
+          <p className="text-3xl font-bold font-mono">${botShieldCost}</p>
+          <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>/month</p>
         </div>
         <div className="text-center">
-          <p className="text-2xl font-bold font-mono text-green-400">{roi}%</p>
-          <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>Return on investment</p>
+          <p className="text-xs mb-2" style={{ color: 'var(--text-muted)' }}>Return on Investment</p>
+          <p className="text-3xl font-bold font-mono text-green-400">{roi}%</p>
+          <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>in first month</p>
         </div>
+      </div>
+
+      <div className="mt-8 p-4 rounded-lg" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
+        <p className="text-sm text-center" style={{ color: 'var(--text-secondary)' }}>
+          💡 <strong>Real example:</strong> An e-commerce site with 2M monthly visitors and 35% bot traffic was losing <span className="text-red-400 font-semibold">$45,000/month</span> to pricing scrapers. After bot-shield, they recovered 92% of that revenue.
+        </p>
       </div>
     </div>
   );

@@ -99,9 +99,11 @@ export default function Pricing() {
       {/* Nav */}
       <nav className="sticky top-0 z-50 border-b" style={{ borderColor: 'var(--border-primary)', background: theme === 'dark' ? 'rgba(0,0,0,0.8)' : 'rgba(255,255,255,0.8)', backdropFilter: 'blur(12px)' }}>
         <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Shield size={20} style={{ color: 'var(--text-primary)' }} />
-            <span className="font-semibold text-sm">bot-shield</span>
+          <div className="flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-md flex items-center justify-center" style={{ background: 'var(--text-primary)' }}>
+              <Shield size={14} style={{ color: 'var(--bg-primary)' }} />
+            </div>
+            <span className="font-semibold text-sm tracking-tight">bot-shield</span>
           </div>
           <div className="flex items-center gap-3">
             <button onClick={toggleTheme} className="p-2 rounded-md transition-colors" style={{ color: 'var(--text-muted)' }}>
@@ -114,10 +116,13 @@ export default function Pricing() {
       </nav>
 
       {/* Hero */}
-      <section className="max-w-6xl mx-auto px-4 pt-20 pb-12 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Simple, transparent pricing.</h1>
-        <p className="text-lg max-w-xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
-          14-day free trial. No credit card required. Every plan includes a bandwidth cap — no surprise bills.
+      <section className="max-w-6xl mx-auto px-4 pt-24 pb-16 text-center">
+        <p className="text-sm font-medium mb-3 text-blue-400">PRICING</p>
+        <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
+          Simple pricing.<br />No surprises.
+        </h1>
+        <p className="text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+          Every plan includes a bandwidth cap so you never get a surprise bill. Start with shadow mode — see what we'd block before enforcing anything.
         </p>
       </section>
 
@@ -165,8 +170,13 @@ export default function Pricing() {
 
       {/* Comparison */}
       <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
-        <div className="max-w-4xl mx-auto px-4 py-16">
-          <h2 className="text-2xl font-bold text-center mb-8">Why not the alternatives?</h2>
+        <div className="max-w-4xl mx-auto px-4 py-20">
+          <div className="max-w-2xl mx-auto text-center mb-10">
+            <h2 className="text-3xl font-bold mb-4 tracking-tight">Why not the alternatives?</h2>
+            <p style={{ color: 'var(--text-secondary)' }}>
+              We're not trying to be everything. We're trying to be the best at one thing: inline bot detection with proof.
+            </p>
+          </div>
           <div className="card overflow-hidden">
             <table className="data-table">
               <thead>
@@ -206,7 +216,7 @@ export default function Pricing() {
                 </tr>
                 <tr>
                   <td className="font-medium" style={{ color: 'var(--text-primary)' }}>Setup time</td>
-                  <td className="text-center font-mono text-xs">15 min</td>
+                  <td className="text-center font-mono text-xs text-green-400">15 min</td>
                   <td className="text-center font-mono text-xs">Weeks</td>
                   <td className="text-center font-mono text-xs">Hours</td>
                 </tr>
@@ -263,13 +273,15 @@ export default function Pricing() {
       {/* Footer */}
       <footer className="border-t py-8" style={{ borderColor: 'var(--border-primary)' }}>
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <Shield size={16} />
-            <span className="text-sm font-medium">bot-shield</span>
+          <div className="flex items-center gap-2.5">
+            <div className="w-6 h-6 rounded flex items-center justify-center" style={{ background: 'var(--text-primary)' }}>
+              <Shield size={12} style={{ color: 'var(--bg-primary)' }} />
+            </div>
+            <span className="text-sm font-medium tracking-tight">bot-shield</span>
           </div>
           <div className="flex gap-6 text-xs" style={{ color: 'var(--text-muted)' }}>
-            <a href="/landing">Home</a>
-            <a href="/">Dashboard</a>
+            <a href="/landing" className="hover:text-white transition-colors">Home</a>
+            <a href="/" className="hover:text-white transition-colors">Dashboard</a>
             <span>Docs</span>
             <span>Status</span>
           </div>

@@ -29,9 +29,11 @@ export default function Layout() {
         <div className="max-w-[1400px] mx-auto px-4 h-14 flex items-center justify-between">
           {/* Left: Logo + Tenant Switcher */}
           <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2">
-              <Shield size={20} style={{ color: 'var(--text-primary)' }} />
-              <span className="font-semibold text-sm" style={{ color: 'var(--text-primary)' }}>Bot-Shield</span>
+            <div className="flex items-center gap-2.5">
+              <div className="w-7 h-7 rounded-md flex items-center justify-center" style={{ background: 'var(--text-primary)' }}>
+                <Shield size={14} style={{ color: 'var(--bg-primary)' }} />
+              </div>
+              <span className="font-semibold text-sm tracking-tight" style={{ color: 'var(--text-primary)' }}>bot-shield</span>
             </div>
 
             {/* Tenant Switcher */}

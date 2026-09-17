@@ -33,12 +33,16 @@ export default function Overview() {
   return (
     <div className="space-y-6 animate-in">
       {/* Shadow Mode Banner */}
-      <div className="flex items-center gap-3 px-4 py-3 rounded-lg" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-secondary)' }}>
-        <AlertTriangle size={16} className="text-yellow-500 flex-shrink-0" />
-        <div className="flex-1">
-          <span className="text-sm font-medium text-yellow-500">Shadow Mode Active</span>
-          <span className="text-sm ml-2" style={{ color: 'var(--text-secondary)' }}>— Evaluating traffic but not dropping requests. <button className="text-yellow-500 underline underline-offset-2 hover:text-yellow-400">Switch to Active Mode</button></span>
+      <div className="flex items-center gap-3 px-4 py-3 rounded-lg transition-all hover:border-yellow-500/30" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-secondary)' }}>
+        <div className="relative flex-shrink-0">
+          <AlertTriangle size={16} className="text-yellow-500" />
+          <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span>
         </div>
+        <div className="flex-1 flex items-center gap-2">
+          <span className="text-sm font-semibold text-yellow-500">Shadow Mode</span>
+          <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>Scoring traffic but not blocking. <button className="text-yellow-500 hover:text-yellow-400 font-medium underline underline-offset-2">Switch to Active →</button></span>
+        </div>
+        <span className="badge badge-yellow text-[10px] hidden sm:inline-flex">SAFE MODE</span>
       </div>
 
       {/* Metrics Strip */}
@@ -46,15 +50,17 @@ export default function Overview() {
         {metrics.map((m, i) => {
           const Icon = m.icon;
           return (
-            <div key={i} className="card p-4">
+            <div key={i} className="card p-4 group hover:border-blue-500/20 transition-all cursor-default">
               <div className="flex items-center justify-between mb-3">
-                <Icon size={16} className={m.color === 'red' ? 'text-red-400' : m.color === 'yellow' ? 'text-yellow-400' : m.color === 'orange' ? 'text-orange-400' : ''} style={{ color: m.color ? undefined : 'var(--text-muted)' }} />
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'var(--bg-tertiary)' }}>
+                  <Icon size={14} className={m.color === 'red' ? 'text-red-400' : m.color === 'yellow' ? 'text-yellow-400' : m.color === 'orange' ? 'text-orange-400' : ''} style={{ color: m.color ? undefined : 'var(--text-muted)' }} />
+                </div>
                 <div className={`flex items-center gap-0.5 text-xs font-medium ${m.up ? 'text-green-400' : 'text-red-400'}`}>
                   {m.up ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
-                  {m.change}
+                  <span>{m.change}</span>
                 </div>
               </div>
-              <p className="text-2xl font-semibold font-mono" style={{ color: 'var(--text-primary)' }}>{m.value}</p>
+              <p className="text-2xl font-bold font-mono" style={{ color: 'var(--text-primary)' }}>{m.value}</p>
               <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>{m.label}</p>
             </div>
           );
