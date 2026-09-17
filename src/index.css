@@ -1,69 +1,177 @@
 @import "tailwindcss";
 
-/* Snake head styling */
+/* Chess.com inspired color variables */
+:root {
+  --board-light: #eeedd5;
+  --board-dark: #769656;
+  --bg-primary: #312e2b;
+  --bg-secondary: #262522;
+  --bg-panel: #21201d;
+  --text-primary: #ffffff;
+  --text-secondary: #b9b9b9;
+  --accent-green: #81b64c;
+  --accent-green-hover: #90c05a;
+  --border-color: #3d3a37;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-primary);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Snake head - styled like a chess piece */
 .snake-head {
-  background: linear-gradient(135deg, #22c55e, #16a34a);
+  background: radial-gradient(circle at 35% 35%, #5a4a3a, #3d3028);
   border-radius: 4px;
-  box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
-  animation: headPulse 1s ease-in-out infinite;
+  box-shadow: inset 0 -2px 3px rgba(0,0,0,0.3), 0 1px 3px rgba(0,0,0,0.4);
+  position: relative;
 }
 
-/* Snake body styling */
-.snake-body {
-  background: linear-gradient(135deg, #4ade80, #22c55e);
-  border-radius: 3px;
-  transition: opacity 0.1s ease;
-}
-
-/* Food styling */
-.food {
-  background: radial-gradient(circle, #f87171, #ef4444);
+.snake-head::after {
+  content: '';
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  width: 35%;
+  height: 35%;
+  background: radial-gradient(circle, rgba(255,255,255,0.25), transparent);
   border-radius: 50%;
-  animation: foodPulse 0.8s ease-in-out infinite;
-  box-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
 }
 
-@keyframes headPulse {
+/* Snake body - wooden piece style */
+.snake-body {
+  background: radial-gradient(circle at 35% 35%, #6b5b4a, #4a3c2e);
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 2px rgba(0,0,0,0.3);
+  transition: opacity 0.08s ease;
+}
+
+/* Food - golden chess piece style */
+.food {
+  background: radial-gradient(circle at 35% 35%, #f5d76e, #c9a83a);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(245, 215, 110, 0.5), inset 0 -2px 3px rgba(0,0,0,0.2);
+  animation: foodGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes foodGlow {
   0%, 100% {
-    box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+    transform: scale(0.8);
+    box-shadow: 0 0 4px rgba(245, 215, 110, 0.3), inset 0 -2px 3px rgba(0,0,0,0.2);
   }
   50% {
-    box-shadow: 0 0 14px rgba(34, 197, 94, 0.8);
+    transform: scale(0.95);
+    box-shadow: 0 0 10px rgba(245, 215, 110, 0.6), inset 0 -2px 3px rgba(0,0,0,0.2);
   }
 }
 
-@keyframes foodPulse {
-  0%, 100% {
-    transform: scale(0.85);
-    box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
-  }
-  50% {
-    transform: scale(1);
-    box-shadow: 0 0 14px rgba(239, 68, 68, 0.7);
-  }
+/* Board cells */
+.cell-light {
+  background-color: var(--board-light);
 }
 
-/* Smooth transitions for game state changes */
-* {
-  -webkit-tap-highlight-color: transparent;
+.cell-dark {
+  background-color: var(--board-dark);
 }
 
-/* Prevent text selection during gameplay */
-.select-none {
-  -webkit-user-select: none;
-  user-select: none;
+/* Highlight last move style */
+.cell-highlight-light {
+  background-color: #f6f669;
 }
 
-/* Custom scrollbar */
+.cell-highlight-dark {
+  background-color: #baca2b;
+}
+
+/* Chess.com style button */
+.btn-green {
+  background-color: var(--accent-green);
+  color: white;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: background-color 0.15s ease;
+}
+
+.btn-green:hover {
+  background-color: var(--accent-green-hover);
+}
+
+.btn-green:active {
+  background-color: #6fa03e;
+}
+
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--bg-secondary);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #475569;
+  background: #4d4a46;
   border-radius: 3px;
+}
+
+/* Selection */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.select-none {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Smooth overlay transitions */
+.game-overlay {
+  animation: overlayFadeIn 0.2s ease-out;
+}
+
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* D-pad button styling */
+.dpad-btn {
+  background: #3d3a37;
+  border: 1px solid #4d4a46;
+  color: #b9b9b9;
+  border-radius: 6px;
+  transition: all 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dpad-btn:active {
+  background: #4d4a46;
+  color: white;
+  transform: scale(0.95);
+}
+
+/* Move list entry animation */
+.move-entry {
+  animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
