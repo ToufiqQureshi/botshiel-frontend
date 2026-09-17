@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { ChevronDown, Shield, Bell, Search, Sun, Moon } from 'lucide-react';
+import { ChevronDown, Shield, Bell, Search, Sun, Moon, Globe } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 const tabs = [
@@ -80,6 +80,9 @@ export default function Layout() {
 
           {/* Right: Search + Notifications + Theme Toggle */}
           <div className="flex items-center gap-2">
+            <a href="/landing" className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium transition-colors" style={{ color: 'var(--text-muted)', border: '1px solid var(--border-secondary)' }}>
+              <Globe size={12} /> Public Site
+            </a>
             <button className="p-2 rounded-md transition-colors text-[#71717a] hover:text-white" style={{ background: 'transparent' }}>
               <Search size={16} />
             </button>
