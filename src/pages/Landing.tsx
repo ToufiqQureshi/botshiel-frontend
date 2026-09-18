@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 import { ArrowRight } from 'lucide-react';
 
@@ -28,28 +29,60 @@ export default function Landing() {
 
       {/* Hero — no icons, pure typography */}
       <section className="max-w-5xl mx-auto px-6 pt-32 pb-24">
-        <div className="max-w-3xl">
-          <p className="text-sm mb-6 font-mono" style={{ color: 'var(--text-muted)' }}>
+        <motion.div 
+          className="max-w-3xl"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <motion.p 
+            className="text-sm mb-6 font-mono" 
+            style={{ color: 'var(--text-muted)' }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             // inline bot protection
-          </p>
-          <h1 className="text-5xl md:text-7xl font-bold leading-[0.95] mb-8 tracking-tight">
+          </motion.p>
+          <motion.h1 
+            className="text-5xl md:text-7xl font-bold leading-[0.95] mb-8 tracking-tight"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
             We read the TLS<br />
             handshake. Then<br />
             we decide.
-          </h1>
-          <p className="text-xl md:text-2xl leading-relaxed mb-10 max-w-2xl" style={{ color: 'var(--text-secondary)' }}>
+          </motion.h1>
+          <motion.p 
+            className="text-xl md:text-2xl leading-relaxed mb-10 max-w-2xl" 
+            style={{ color: 'var(--text-secondary)' }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
             bot-shield scores the first request from every client it has never seen. No prior sighting. No blocklists. No waiting.
-          </p>
-          <div className="flex items-center gap-6">
-            <a href="/pricing" className="group btn-primary px-6 py-3 text-sm flex items-center gap-2">
+          </motion.p>
+          <motion.div 
+            className="flex items-center gap-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
+            <motion.a 
+              href="/pricing" 
+              className="group btn-primary px-6 py-3 text-sm flex items-center gap-2"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               Start free trial
               <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
-            </a>
+            </motion.a>
             <span className="text-sm" style={{ color: 'var(--text-muted)' }}>
               $200/mo · 14-day trial · no card
             </span>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Status indicator — honest */}
         <div className="mt-20 pt-8 border-t" style={{ borderColor: 'var(--border-primary)' }}>
@@ -62,18 +95,37 @@ export default function Landing() {
       </section>
 
       {/* What we actually do — text-heavy, no cards */}
-      <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
+      <motion.section 
+        className="border-t" 
+        style={{ borderColor: 'var(--border-primary)' }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6 }}
+      >
         <div className="max-w-5xl mx-auto px-6 py-24">
           <div className="grid md:grid-cols-12 gap-12">
-            <div className="md:col-span-4">
+            <motion.div 
+              className="md:col-span-4"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
               <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
                 // the problem
               </p>
               <h2 className="text-3xl font-bold tracking-tight">
                 Bot protection is either too expensive or too late.
               </h2>
-            </div>
-            <div className="md:col-span-8 space-y-8">
+            </motion.div>
+            <motion.div 
+              className="md:col-span-8 space-y-8"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
               <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                 Enterprise tools (Akamai, DataDome, HUMAN) cost $1,500–$50,000/month, require your traffic in their cloud, and take weeks to onboard.
               </p>
@@ -88,20 +140,41 @@ export default function Landing() {
                   bot-shield reads the live TLS ClientHello and scores the <span className="font-bold">first request</span>. Then it tells you exactly why.
                 </p>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* How it works — minimal, numbered */}
-      <section id="how" className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
+      <motion.section 
+        id="how" 
+        className="border-t" 
+        style={{ borderColor: 'var(--border-primary)' }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6 }}
+      >
         <div className="max-w-5xl mx-auto px-6 py-24">
-          <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
+          <motion.p 
+            className="text-sm font-mono mb-4" 
+            style={{ color: 'var(--text-muted)' }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
             // how it works
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-16 tracking-tight max-w-2xl">
+          </motion.p>
+          <motion.h2 
+            className="text-3xl md:text-4xl font-bold mb-16 tracking-tight max-w-2xl"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
             Point a CNAME. We handle the rest.
-          </h2>
+          </motion.h2>
 
           <div className="space-y-16">
             <div className="grid md:grid-cols-12 gap-8 items-start">
@@ -179,10 +252,18 @@ export default function Landing() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Evidence — the real differentiator */}
-      <section id="proof" className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
+      <motion.section 
+        id="proof" 
+        className="border-t" 
+        style={{ borderColor: 'var(--border-primary)' }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6 }}
+      >
         <div className="max-w-5xl mx-auto px-6 py-24">
           <div className="grid md:grid-cols-12 gap-12">
             <div className="md:col-span-5">
@@ -222,10 +303,17 @@ export default function Landing() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Interactive Demo - Trust Builder */}
-      <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
+      <motion.section 
+        className="border-t" 
+        style={{ borderColor: 'var(--border-primary)' }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6 }}
+      >
         <div className="max-w-5xl mx-auto px-6 py-24">
           <div className="max-w-3xl mb-12">
             <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
@@ -274,10 +362,17 @@ export default function Landing() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Founding Customer Program */}
-      <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
+      <motion.section 
+        className="border-t" 
+        style={{ borderColor: 'var(--border-primary)' }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6 }}
+      >
         <div className="max-w-5xl mx-auto px-6 py-24">
           <div className="max-w-3xl">
             <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
@@ -333,10 +428,17 @@ export default function Landing() {
             </p>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Security Principles */}
-      <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
+      <motion.section 
+        className="border-t" 
+        style={{ borderColor: 'var(--border-primary)' }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6 }}
+      >
         <div className="max-w-5xl mx-auto px-6 py-24">
           <div className="grid md:grid-cols-12 gap-12">
             <div className="md:col-span-5">
@@ -375,10 +477,17 @@ export default function Landing() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* What's Built */}
-      <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
+      <motion.section 
+        className="border-t" 
+        style={{ borderColor: 'var(--border-primary)' }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6 }}
+      >
         <div className="max-w-5xl mx-auto px-6 py-24">
           <div className="grid md:grid-cols-12 gap-12">
             <div className="md:col-span-5">
