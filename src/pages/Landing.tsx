@@ -711,14 +711,44 @@ export default function Landing() {
 
       {/* Footer */}
       <footer className="border-t py-8" style={{ borderColor: 'var(--border-primary)' }}>
-        <div className="max-w-5xl mx-auto px-6 flex items-center justify-between">
-          <span className="text-sm font-bold tracking-tight">bot-shield</span>
-          <div className="flex gap-6 text-xs" style={{ color: 'var(--text-muted)' }}>
-            <a href="/pricing">Pricing</a>
-            <a href="/changelog">Changelog</a>
-            <a href="/docs">Docs</a>
-            <a href="/contact">Contact</a>
-            <span>© 2026</span>
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <p className="text-sm font-bold tracking-tight mb-3">bot-shield</p>
+              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                Inline bot protection that reads the TLS handshake and scores the first request.
+              </p>
+            </div>
+            <div>
+              <p className="text-xs font-semibold mb-3" style={{ color: 'var(--text-secondary)' }}>Product</p>
+              <ul className="space-y-2 text-xs" style={{ color: 'var(--text-muted)' }}>
+                <li><a href="/pricing" className="hover:text-white transition-colors">Pricing</a></li>
+                <li><a href="/changelog" className="hover:text-white transition-colors">Changelog</a></li>
+                <li><a href="/docs" className="hover:text-white transition-colors">Documentation</a></li>
+                <li><a href="/contact" className="hover:text-white transition-colors">Contact</a></li>
+              </ul>
+            </div>
+            <div>
+              <p className="text-xs font-semibold mb-3" style={{ color: 'var(--text-secondary)' }}>Company</p>
+              <ul className="space-y-2 text-xs" style={{ color: 'var(--text-muted)' }}>
+                <li><a href="/about" className="hover:text-white transition-colors">About</a></li>
+                <li><a href="https://github.com/ToufiqQureshi/bot-shield" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a></li>
+              </ul>
+            </div>
+            <div>
+              <p className="text-xs font-semibold mb-3" style={{ color: 'var(--text-secondary)' }}>Legal</p>
+              <ul className="space-y-2 text-xs" style={{ color: 'var(--text-muted)' }}>
+                <li><a href="/terms" className="hover:text-white transition-colors">Terms of Service</a></li>
+                <li><a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="pt-6 border-t flex items-center justify-between" style={{ borderColor: 'var(--border-primary)' }}>
+            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>© 2026 bot-shield. All rights reserved.</p>
+            <div className="flex gap-4 text-xs" style={{ color: 'var(--text-muted)' }}>
+              <a href="/sign-in" className="hover:text-white transition-colors">Sign in</a>
+              <a href="/sign-up" className="hover:text-white transition-colors">Sign up</a>
+            </div>
           </div>
         </div>
       </footer>
