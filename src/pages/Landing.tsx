@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 import { ArrowRight } from 'lucide-react';
 
@@ -27,64 +25,32 @@ export default function Landing() {
         </div>
       </nav>
 
-      {/* Hero — no icons, pure typography */}
-      <section className="max-w-5xl mx-auto px-6 pt-32 pb-24">
-        <motion.div 
-          className="max-w-3xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <motion.p 
-            className="text-sm mb-6 font-mono" 
-            style={{ color: 'var(--text-muted)' }}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
+      {/* Hero */}
+      <section className="max-w-5xl mx-auto px-6 pt-32 pb-24 animate-fade-in-up">
+        <div className="max-w-3xl">
+          <p className="text-sm mb-6 font-mono animate-fade-in-left stagger-1" style={{ color: 'var(--text-muted)' }}>
             // inline bot protection
-          </motion.p>
-          <motion.h1 
-            className="text-5xl md:text-7xl font-bold leading-[0.95] mb-8 tracking-tight"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
+          </p>
+          <h1 className="text-5xl md:text-7xl font-bold leading-[0.95] mb-8 tracking-tight animate-fade-in-up stagger-2">
             We read the TLS<br />
             handshake. Then<br />
             we decide.
-          </motion.h1>
-          <motion.p 
-            className="text-xl md:text-2xl leading-relaxed mb-10 max-w-2xl" 
-            style={{ color: 'var(--text-secondary)' }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
+          </h1>
+          <p className="text-xl md:text-2xl leading-relaxed mb-10 max-w-2xl animate-fade-in-up stagger-3" style={{ color: 'var(--text-secondary)' }}>
             bot-shield scores the first request from every client it has never seen. No prior sighting. No blocklists. No waiting.
-          </motion.p>
-          <motion.div 
-            className="flex items-center gap-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-          >
-            <motion.a 
-              href="/pricing" 
-              className="group btn-primary px-6 py-3 text-sm flex items-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
+          </p>
+          <div className="flex items-center gap-6 animate-fade-in-up stagger-4">
+            <a href="/pricing" className="group btn-primary px-6 py-3 text-sm flex items-center gap-2 hover-lift">
               Start free trial
               <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
-            </motion.a>
+            </a>
             <span className="text-sm" style={{ color: 'var(--text-muted)' }}>
               $200/mo · 14-day trial · no card
             </span>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
-        {/* Status indicator — honest */}
+        {/* Status indicator */}
         <div className="mt-20 pt-8 border-t" style={{ borderColor: 'var(--border-primary)' }}>
           <div className="flex items-center gap-3">
             <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></span>
@@ -94,38 +60,19 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* What we actually do — text-heavy, no cards */}
-      <motion.section 
-        className="border-t" 
-        style={{ borderColor: 'var(--border-primary)' }}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6 }}
-      >
+      {/* Problem */}
+      <section className="border-t animate-fade-in-up" style={{ borderColor: 'var(--border-primary)' }}>
         <div className="max-w-5xl mx-auto px-6 py-24">
           <div className="grid md:grid-cols-12 gap-12">
-            <motion.div 
-              className="md:col-span-4"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
+            <div className="md:col-span-4 animate-fade-in-left stagger-2">
               <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
                 // the problem
               </p>
               <h2 className="text-3xl font-bold tracking-tight">
                 Bot protection is either too expensive or too late.
               </h2>
-            </motion.div>
-            <motion.div 
-              className="md:col-span-8 space-y-8"
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
+            </div>
+            <div className="md:col-span-8 space-y-8 animate-fade-in-right stagger-3">
               <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                 Enterprise tools (Akamai, DataDome, HUMAN) cost $1,500–$50,000/month, require your traffic in their cloud, and take weeks to onboard.
               </p>
@@ -140,41 +87,20 @@ export default function Landing() {
                   bot-shield reads the live TLS ClientHello and scores the <span className="font-bold">first request</span>. Then it tells you exactly why.
                 </p>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
-      </motion.section>
+      </section>
 
-      {/* How it works — minimal, numbered */}
-      <motion.section 
-        id="how" 
-        className="border-t" 
-        style={{ borderColor: 'var(--border-primary)' }}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6 }}
-      >
+      {/* How it works */}
+      <section id="how" className="border-t animate-fade-in-up" style={{ borderColor: 'var(--border-primary)' }}>
         <div className="max-w-5xl mx-auto px-6 py-24">
-          <motion.p 
-            className="text-sm font-mono mb-4" 
-            style={{ color: 'var(--text-muted)' }}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
+          <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
             // how it works
-          </motion.p>
-          <motion.h2 
-            className="text-3xl md:text-4xl font-bold mb-16 tracking-tight max-w-2xl"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
+          </p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-16 tracking-tight max-w-2xl">
             Point a CNAME. We handle the rest.
-          </motion.h2>
+          </h2>
 
           <div className="space-y-16">
             <div className="grid md:grid-cols-12 gap-8 items-start">
@@ -252,661 +178,21 @@ export default function Landing() {
             </div>
           </div>
         </div>
-      </motion.section>
-
-      {/* Evidence — the real differentiator */}
-      <motion.section 
-        id="proof" 
-        className="border-t" 
-        style={{ borderColor: 'var(--border-primary)' }}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="max-w-5xl mx-auto px-6 py-24">
-          <div className="grid md:grid-cols-12 gap-12">
-            <div className="md:col-span-5">
-              <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
-                // evidence trail
-              </p>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
-                We prove every decision.
-              </h2>
-              <p className="text-lg leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
-                Every block, every challenge, every pass — logged with the exact signals that triggered it. Show your team, your board, your customers exactly what happened and why.
-              </p>
-              <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                No black boxes. No "trust us." Full transparency.
-              </p>
-            </div>
-            <div className="md:col-span-7">
-              <div className="font-mono text-xs p-5 rounded-lg space-y-2" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-                <p style={{ color: 'var(--text-muted)' }}>// evidence log — 2026-09-17 14:23:01 UTC</p>
-                <p className="mt-3">Request ID: req_8f3a2b1c</p>
-                <p>IP: 185.220.101.42 (DE)</p>
-                <p>JA4: t13d1516h2_8daaf6152771_0271d189196b</p>
-                <p>UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64)</p>
-                <p className="mt-3 pt-3 border-t" style={{ borderColor: 'var(--border-primary)' }}>
-                  <span style={{ color: 'var(--text-muted)' }}>Signals fired:</span>
-                </p>
-                <p>  <span className="text-red-400">[UA Mismatch]</span> claims Chrome, TLS says otherwise</p>
-                <p>  <span className="text-red-400">[TLS Fragmentation]</span> ClientHello split across records</p>
-                <p>  <span className="text-yellow-400">[Header Order]</span> non-browser ordering detected</p>
-                <p className="mt-3 pt-3 border-t" style={{ borderColor: 'var(--border-primary)' }}>
-                  Score: <span className="text-red-400 font-bold">87/100</span>
-                </p>
-                <p>Decision: <span className="text-red-400 font-bold">BLOCK</span></p>
-                <p>Origin reached: <span className="text-red-400">no</span></p>
-                <p>Latency: 2.3ms</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* Interactive Demo - Trust Builder */}
-      <motion.section 
-        className="border-t" 
-        style={{ borderColor: 'var(--border-primary)' }}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="max-w-5xl mx-auto px-6 py-24">
-          <div className="max-w-3xl mb-12">
-            <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
-              // try it now
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
-              See it in action. No signup required.
-            </h2>
-            <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-              Run a sample request through bot-shield and see exactly how we score and decide. This is the same engine protecting real sites right now.
-            </p>
-          </div>
-
-          <div className="card p-6">
-            <div className="mb-6">
-              <label className="text-xs font-mono mb-2 block" style={{ color: 'var(--text-muted)' }}>
-                // sample request
-              </label>
-              <select className="w-full p-3 rounded text-sm font-mono" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)', color: 'var(--text-primary)' }}>
-                <option>Real Chrome browser (Windows 10)</option>
-                <option>Suspicious bot (claims Chrome, TLS disagrees)</option>
-                <option>Headless browser (Puppeteer signature)</option>
-                <option>Known scraper (JA4 matches database)</option>
-              </select>
-            </div>
-
-            <button className="btn-primary w-full py-3 text-sm mb-6">
-              Run through bot-shield →
-            </button>
-
-            <div className="font-mono text-xs p-4 rounded space-y-2" style={{ background: 'var(--bg-primary)', border: '1px solid var(--border-primary)' }}>
-              <p style={{ color: 'var(--text-muted)' }}>// analyzing request...</p>
-              <p className="mt-2">JA4: t13d1516h2_8daaf6152771_0271d189196b</p>
-              <p>TLS: 1.3 | AES_256_GCM_SHA384</p>
-              <p>UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64)</p>
-              <p className="mt-3 pt-3 border-t" style={{ borderColor: 'var(--border-primary)' }}>
-                <span className="text-green-400">✓</span> UA matches TLS fingerprint
-              </p>
-              <p><span className="text-green-400">✓</span> No TLS fragmentation</p>
-              <p><span className="text-green-400">✓</span> Browser-like header order</p>
-              <p className="mt-3 pt-3 border-t" style={{ borderColor: 'var(--border-primary)' }}>
-                Score: <span className="text-green-400 font-bold">12/100</span>
-              </p>
-              <p>Decision: <span className="text-green-400 font-bold">PASS</span></p>
-              <p>Latency added: 1.8ms</p>
-            </div>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* Founding Customer Program */}
-      <motion.section 
-        className="border-t" 
-        style={{ borderColor: 'var(--border-primary)' }}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="max-w-5xl mx-auto px-6 py-24">
-          <div className="max-w-3xl">
-            <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
-              // founding customers
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
-              We're looking for 10 founding customers.
-            </h2>
-            <p className="text-lg leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
-              bot-shield is in active development. We're looking for 10 companies to build this with us. You'll get early access, direct line to engineering, and founding customer pricing locked in forever.
-            </p>
-            <p className="text-lg leading-relaxed mb-8" style={{ color: 'var(--text-secondary)' }}>
-              In return, we need your honest feedback. What works, what doesn't, what's missing. This is how we build something that actually solves the problem.
-            </p>
-
-            <div className="space-y-4 mb-8">
-              <div className="flex gap-4">
-                <span className="text-2xl font-bold font-mono" style={{ color: 'var(--text-muted)' }}>01</span>
-                <div>
-                  <p className="font-semibold mb-1">Early access</p>
-                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Be among the first to use bot-shield. Shape the roadmap with your feedback.</p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <span className="text-2xl font-bold font-mono" style={{ color: 'var(--text-muted)' }}>02</span>
-                <div>
-                  <p className="font-semibold mb-1">Founding pricing</p>
-                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Lock in $200/mo forever. No price increases, ever.</p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <span className="text-2xl font-bold font-mono" style={{ color: 'var(--text-muted)' }}>03</span>
-                <div>
-                  <p className="font-semibold mb-1">Direct support</p>
-                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Weekly calls with the engineering team. Your problems get solved fast.</p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <span className="text-2xl font-bold font-mono" style={{ color: 'var(--text-muted)' }}>04</span>
-                <div>
-                  <p className="font-semibold mb-1">Zero risk</p>
-                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Start with shadow mode. See what we find before blocking anything.</p>
-                </div>
-              </div>
-            </div>
-
-            <a href="/contact" className="group btn-primary px-6 py-3 text-sm inline-flex items-center gap-2">
-              Apply for founding access
-              <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
-            </a>
-            <p className="text-sm mt-4" style={{ color: 'var(--text-muted)' }}>
-              7 spots remaining · No credit card required
-            </p>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* Security Principles */}
-      <motion.section 
-        className="border-t" 
-        style={{ borderColor: 'var(--border-primary)' }}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="max-w-5xl mx-auto px-6 py-24">
-          <div className="grid md:grid-cols-12 gap-12">
-            <div className="md:col-span-5">
-              <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
-                // security principles
-              </p>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
-                Privacy by design.
-              </h2>
-              <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                Your traffic never touches our disk. We process it in memory, make a decision, and forward it. No logging of request bodies. No data retention beyond what's needed for scoring.
-              </p>
-            </div>
-            <div className="md:col-span-7">
-              <div className="space-y-4">
-                <div className="p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-                  <p className="font-semibold mb-1">In-memory processing</p>
-                  <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>Requests are scored in memory and immediately forwarded. Nothing is written to disk.</p>
-                </div>
-                <div className="p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-                  <p className="font-semibold mb-1">Minimal data retention</p>
-                  <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>We only keep what's needed for scoring: JA4 fingerprints, IP addresses, and decision logs. No request bodies.</p>
-                </div>
-                <div className="p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-                  <p className="font-semibold mb-1">Self-hosted option</p>
-                  <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>For regulated industries: run the same binary in your own infrastructure. Your data never leaves your network.</p>
-                </div>
-                <div className="p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-                  <p className="font-semibold mb-1">Transparent decisions</p>
-                  <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>Every block, every challenge, every pass comes with a full evidence trail. No black boxes.</p>
-                </div>
-              </div>
-              <p className="text-sm mt-6" style={{ color: 'var(--text-muted)' }}>
-                <a href="/docs/security" className="underline hover:text-white transition-colors">Read our security principles →</a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* What's Built */}
-      <motion.section 
-        className="border-t" 
-        style={{ borderColor: 'var(--border-primary)' }}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="max-w-5xl mx-auto px-6 py-24">
-          <div className="grid md:grid-cols-12 gap-12">
-            <div className="md:col-span-5">
-              <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
-                // what's built
-              </p>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
-                Here's what works today.
-              </h2>
-              <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                We're not vaporware. The core engine is built and tested. We're looking for real traffic to prove it works at scale.
-              </p>
-            </div>
-            <div className="md:col-span-7">
-              <div className="space-y-3">
-                <div className="flex items-center justify-between p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-                  <div>
-                    <p className="font-semibold text-sm">TLS/JA4 fingerprinting</p>
-                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Reads ClientHello, generates JA4 hash</p>
-                  </div>
-                  <span className="text-xs font-mono text-green-400">✓ Done</span>
-                </div>
-                <div className="flex items-center justify-between p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-                  <div>
-                    <p className="font-semibold text-sm">UA consistency check</p>
-                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Flags mismatches between UA and TLS</p>
-                  </div>
-                  <span className="text-xs font-mono text-green-400">✓ Done</span>
-                </div>
-                <div className="flex items-center justify-between p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-                  <div>
-                    <p className="font-semibold text-sm">Scoring engine</p>
-                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Multi-signal scoring with configurable thresholds</p>
-                  </div>
-                  <span className="text-xs font-mono text-green-400">✓ Done</span>
-                </div>
-                <div className="flex items-center justify-between p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-                  <div>
-                    <p className="font-semibold text-sm">JS challenge</p>
-                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>SHA-256 proof + canvas fingerprint</p>
-                  </div>
-                  <span className="text-xs font-mono text-green-400">✓ Done</span>
-                </div>
-                <div className="flex items-center justify-between p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-                  <div>
-                    <p className="font-semibold text-sm">Shadow mode</p>
-                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Score without blocking, measure false positives</p>
-                  </div>
-                  <span className="text-xs font-mono text-green-400">✓ Done</span>
-                </div>
-                <div className="flex items-center justify-between p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-                  <div>
-                    <p className="font-semibold text-sm">Dashboard</p>
-                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Real-time analytics and evidence logs</p>
-                  </div>
-                  <span className="text-xs font-mono text-green-400">✓ Done</span>
-                </div>
-              </div>
-              <p className="text-sm mt-6" style={{ color: 'var(--text-muted)' }}>
-                <a href="/changelog" className="underline hover:text-white transition-colors">View full changelog →</a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Shadow mode */}
-      <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
-        <div className="max-w-5xl mx-auto px-6 py-24">
-          <div className="max-w-3xl">
-            <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
-              // shadow mode
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
-              Try it with zero risk.
-            </h2>
-            <p className="text-lg leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
-              Point real traffic at bot-shield in shadow mode. We score everything, log everything, but block nothing. See exactly what we'd catch before you enforce anything.
-            </p>
-            <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-              No false positives. No broken checkout flows. No angry customers. Just data.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Who it's for */}
-      <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
-        <div className="max-w-5xl mx-auto px-6 py-24">
-          <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
-            // who it's for
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-16 tracking-tight">
-            Built for teams losing real money to bots.
-          </h2>
-
-          <div className="grid md:grid-cols-2 gap-x-16 gap-y-12">
-            <div>
-              <h3 className="text-lg font-semibold mb-2">E-commerce</h3>
-              <p style={{ color: 'var(--text-secondary)' }}>Pricing scrapers copying your catalog. Scalpers hoarding inventory. Checkout bots beating your flash sales.</p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-2">Ticketing & Booking</h3>
-              <p style={{ color: 'var(--text-secondary)' }}>Bots buying up concert tickets, hotel rooms, and appointment slots before real customers get a chance.</p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-2">API Platforms</h3>
-              <p style={{ color: 'var(--text-secondary)' }}>Usage-billed APIs getting hammered by automated clients. Your bandwidth bill going through the roof.</p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-2">Job Boards & Classifieds</h3>
-              <p style={{ color: 'var(--text-secondary)' }}>Competitors scraping your listings. Automated applications flooding your system. Data being copied in real-time.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Integrations - Ecosystem Trust */}
-      <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
-        <div className="max-w-5xl mx-auto px-6 py-24">
-          <div className="max-w-3xl mb-12">
-            <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
-              // integrations
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
-              Works with your stack.
-            </h2>
-            <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-              bot-shield integrates with the tools you already use. Export evidence logs to your SIEM, get alerts in Slack, automate responses with webhooks.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="p-6 rounded text-center" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-              <p className="font-semibold mb-1">Datadog</p>
-              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Metrics & logs</p>
-            </div>
-            <div className="p-6 rounded text-center" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-              <p className="font-semibold mb-1">Splunk</p>
-              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>SIEM integration</p>
-            </div>
-            <div className="p-6 rounded text-center" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-              <p className="font-semibold mb-1">Slack</p>
-              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Real-time alerts</p>
-            </div>
-            <div className="p-6 rounded text-center" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-              <p className="font-semibold mb-1">PagerDuty</p>
-              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Incident management</p>
-            </div>
-            <div className="p-6 rounded text-center" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-              <p className="font-semibold mb-1">AWS S3</p>
-              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Log archival</p>
-            </div>
-            <div className="p-6 rounded text-center" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-              <p className="font-semibold mb-1">Elastic</p>
-              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Search & analytics</p>
-            </div>
-            <div className="p-6 rounded text-center" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-              <p className="font-semibold mb-1">Webhooks</p>
-              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Custom automation</p>
-            </div>
-            <div className="p-6 rounded text-center" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-              <p className="font-semibold mb-1">REST API</p>
-              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Full programmatic access</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Founder */}
-      <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
-        <div className="max-w-5xl mx-auto px-6 py-24">
-          <div className="max-w-3xl">
-            <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
-              // who's building this
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
-              Hi, I'm Toufiq.
-            </h2>
-            <p className="text-lg leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
-              I'm building bot-shield because I've seen how broken bot protection is. Enterprise tools cost $50K/month and take weeks to onboard. Free tools react after the damage is done. Neither works for mid-size teams.
-            </p>
-            <p className="text-lg leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
-              I've built security infrastructure at scale. I've fought against bot protection as a security researcher. I know what works, what doesn't, and what teams actually need.
-            </p>
-            <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-              bot-shield is my attempt to build something better. Something transparent. Something that actually proves its decisions.
-            </p>
-            <div className="mt-8 pt-8 border-t" style={{ borderColor: 'var(--border-primary)' }}>
-              <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
-                Questions? <a href="/contact" className="underline hover:text-white transition-colors">Let's talk →</a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ROI */}
-      <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
-        <div className="max-w-5xl mx-auto px-6 py-24">
-          <div className="grid md:grid-cols-12 gap-12">
-            <div className="md:col-span-5">
-              <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
-                // the math
-              </p>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
-                How much are bots costing you?
-              </h2>
-              <ROICalculator />
-            </div>
-            <div className="md:col-span-7 flex items-center">
-              <div>
-                <p className="text-lg leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
-                  Most teams don't realize how much revenue they're losing to bots until they measure it. Pricing scrapers, ticket hoarders, API abusers — they're all costing you real money every day.
-                </p>
-                <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                  Use this calculator to estimate your exposure. Then point a CNAME at bot-shield and see the real numbers in your own traffic.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Risk Reversal - Money Back Guarantee */}
-      <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
-        <div className="max-w-5xl mx-auto px-6 py-24">
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
-              // no risk
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
-              30-day money-back guarantee.
-            </h2>
-            <p className="text-lg leading-relaxed mb-8" style={{ color: 'var(--text-secondary)' }}>
-              Try bot-shield for 30 days. If you don't see measurable bot reduction and revenue recovery, we'll refund every penny. No questions asked.
-            </p>
-            <div className="grid md:grid-cols-3 gap-6 mb-8">
-              <div className="p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-                <p className="font-bold text-2xl mb-1">14 days</p>
-                <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Free trial, no card required</p>
-              </div>
-              <div className="p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-                <p className="font-bold text-2xl mb-1">30 days</p>
-                <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Money-back guarantee</p>
-              </div>
-              <div className="p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-                <p className="font-bold text-2xl mb-1">Cancel</p>
-                <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Anytime, no lock-in</p>
-              </div>
-            </div>
-            <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
-              We're confident you'll see results. That's why we make it risk-free.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Build in Public */}
-      <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
-        <div className="max-w-5xl mx-auto px-6 py-24">
-          <div className="max-w-3xl">
-            <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
-              // building in public
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
-              Follow the journey.
-            </h2>
-            <p className="text-lg leading-relaxed mb-8" style={{ color: 'var(--text-secondary)' }}>
-              We're building bot-shield in the open. Every technical decision, every challenge, every win — shared publicly. Because trust is built through transparency.
-            </p>
-
-            <div className="space-y-4 mb-8">
-              <a href="/changelog" className="block p-4 rounded transition-colors hover:bg-[var(--bg-tertiary)]" style={{ border: '1px solid var(--border-primary)' }}>
-                <div className="flex items-center justify-between mb-2">
-                  <p className="font-semibold">Changelog</p>
-                  <span className="text-xs" style={{ color: 'var(--text-muted)' }}>Updated weekly</span>
-                </div>
-                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-                  Every feature, every fix, every improvement. See exactly what we're shipping.
-                </p>
-              </a>
-
-              <a href="/docs" className="block p-4 rounded transition-colors hover:bg-[var(--bg-tertiary)]" style={{ border: '1px solid var(--border-primary)' }}>
-                <div className="flex items-center justify-between mb-2">
-                  <p className="font-semibold">Technical docs</p>
-                  <span className="text-xs" style={{ color: 'var(--text-muted)' }}>API reference</span>
-                </div>
-                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-                  How JA4 fingerprinting works. How our scoring engine decides. Full API documentation.
-                </p>
-              </a>
-
-              <a href="https://github.com/ToufiqQureshi/bot-shield" target="_blank" rel="noopener noreferrer" className="block p-4 rounded transition-colors hover:bg-[var(--bg-tertiary)]" style={{ border: '1px solid var(--border-primary)' }}>
-                <div className="flex items-center justify-between mb-2">
-                  <p className="font-semibold">GitHub</p>
-                  <span className="text-xs" style={{ color: 'var(--text-muted)' }}>Open source</span>
-                </div>
-                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-                  We use open-source libraries internally. See what we're built on.
-                </p>
-              </a>
-            </div>
-
-            <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
-              Questions? <a href="/contact" className="underline hover:text-white transition-colors">Get in touch →</a>
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
-        <div className="max-w-5xl mx-auto px-6 py-32 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
-            Stop losing revenue<br />to bots.
-          </h2>
-          <p className="text-xl mb-10 max-w-xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
-            Start with shadow mode. See what we'd block. Then decide.
-          </p>
-          <a href="/pricing" className="group btn-primary px-8 py-4 text-base inline-flex items-center gap-2">
-            Start free trial
-            <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
-          </a>
-          <p className="text-sm mt-6" style={{ color: 'var(--text-muted)' }}>
-            No credit card · 14-day trial · 30-day money-back guarantee
-          </p>
-        </div>
       </section>
 
       {/* Footer */}
       <footer className="border-t py-8" style={{ borderColor: 'var(--border-primary)' }}>
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <p className="text-sm font-bold tracking-tight mb-3">bot-shield</p>
-              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
-                Inline bot protection that reads the TLS handshake and scores the first request.
-              </p>
-            </div>
-            <div>
-              <p className="text-xs font-semibold mb-3" style={{ color: 'var(--text-secondary)' }}>Product</p>
-              <ul className="space-y-2 text-xs" style={{ color: 'var(--text-muted)' }}>
-                <li><a href="/pricing" className="hover:text-white transition-colors">Pricing</a></li>
-                <li><a href="/changelog" className="hover:text-white transition-colors">Changelog</a></li>
-                <li><a href="/docs" className="hover:text-white transition-colors">Documentation</a></li>
-                <li><a href="/contact" className="hover:text-white transition-colors">Contact</a></li>
-              </ul>
-            </div>
-            <div>
-              <p className="text-xs font-semibold mb-3" style={{ color: 'var(--text-secondary)' }}>Company</p>
-              <ul className="space-y-2 text-xs" style={{ color: 'var(--text-muted)' }}>
-                <li><a href="/about" className="hover:text-white transition-colors">About</a></li>
-                <li><a href="https://github.com/ToufiqQureshi/bot-shield" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a></li>
-              </ul>
-            </div>
-            <div>
-              <p className="text-xs font-semibold mb-3" style={{ color: 'var(--text-secondary)' }}>Legal</p>
-              <ul className="space-y-2 text-xs" style={{ color: 'var(--text-muted)' }}>
-                <li><a href="/terms" className="hover:text-white transition-colors">Terms of Service</a></li>
-                <li><a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="pt-6 border-t flex items-center justify-between" style={{ borderColor: 'var(--border-primary)' }}>
-            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>© 2026 bot-shield. All rights reserved.</p>
-            <div className="flex gap-4 text-xs" style={{ color: 'var(--text-muted)' }}>
-              <a href="/sign-in" className="hover:text-white transition-colors">Sign in</a>
-              <a href="/sign-up" className="hover:text-white transition-colors">Sign up</a>
-            </div>
+        <div className="max-w-5xl mx-auto px-6 flex items-center justify-between">
+          <span className="text-sm font-bold tracking-tight">bot-shield</span>
+          <div className="flex gap-6 text-xs" style={{ color: 'var(--text-muted)' }}>
+            <a href="/pricing">Pricing</a>
+            <a href="/changelog">Changelog</a>
+            <a href="/docs">Docs</a>
+            <a href="/contact">Contact</a>
+            <span>© 2026</span>
           </div>
         </div>
       </footer>
-    </div>
-  );
-}
-
-function ROICalculator() {
-  const [visitors, setVisitors] = useState(1000000);
-  const [botPct, setBotPct] = useState(30);
-  const [aov, setAov] = useState(50);
-
-  const leak = Math.floor(visitors * (botPct / 100) * 0.15 * aov / 100);
-  const roi = Math.floor(((leak - 200) / 200) * 100);
-
-  return (
-    <div className="space-y-6">
-      <div>
-        <div className="flex justify-between text-xs mb-2">
-          <span style={{ color: 'var(--text-muted)' }}>Monthly visitors</span>
-          <span className="font-mono font-medium">{visitors.toLocaleString()}</span>
-        </div>
-        <input type="range" min="100000" max="10000000" step="100000" value={visitors} onChange={(e) => setVisitors(Number(e.target.value))} className="w-full" />
-      </div>
-      <div>
-        <div className="flex justify-between text-xs mb-2">
-          <span style={{ color: 'var(--text-muted)' }}>Bot traffic</span>
-          <span className="font-mono font-medium">{botPct}%</span>
-        </div>
-        <input type="range" min="10" max="60" step="5" value={botPct} onChange={(e) => setBotPct(Number(e.target.value))} className="w-full" />
-      </div>
-      <div>
-        <div className="flex justify-between text-xs mb-2">
-          <span style={{ color: 'var(--text-muted)' }}>Avg order value</span>
-          <span className="font-mono font-medium">${aov}</span>
-        </div>
-        <input type="range" min="10" max="500" step="10" value={aov} onChange={(e) => setAov(Number(e.target.value))} className="w-full" />
-      </div>
-
-      <div className="pt-6 border-t grid grid-cols-2 gap-4" style={{ borderColor: 'var(--border-primary)' }}>
-        <div>
-          <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>Revenue at risk</p>
-          <p className="text-2xl font-bold font-mono text-red-400">${leak.toLocaleString()}</p>
-        </div>
-        <div>
-          <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>ROI</p>
-          <p className="text-2xl font-bold font-mono text-green-400">{roi}%</p>
-        </div>
-      </div>
     </div>
   );
 }
