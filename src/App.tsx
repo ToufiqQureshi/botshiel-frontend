@@ -9,6 +9,9 @@ import ProtectionSettings from './pages/ProtectionSettings';
 import DomainsSiem from './pages/DomainsSiem';
 import Landing from './pages/Landing';
 import Pricing from './pages/Pricing';
+import Changelog from './pages/Changelog';
+import Docs from './pages/Docs';
+import Contact from './pages/Contact';
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
           {/* Marketing Pages (no dashboard layout) */}
           <Route path="/landing" element={<Landing />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/changelog" element={<Changelog />} />
+          <Route path="/docs" element={<Docs />} />
+          <Route path="/contact" element={<Contact />} />
 
           {/* Dashboard */}
           <Route path="/" element={<Layout />}>

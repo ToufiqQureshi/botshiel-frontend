@@ -1,39 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
-import { ArrowRight, Sun, Moon } from 'lucide-react';
-
-function useCounter(target: number, duration: number = 2000) {
-  const [count, setCount] = useState(0);
-  const [started, setStarted] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setStarted(true), 300);
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    if (!started) return;
-    const steps = 60;
-    const increment = target / steps;
-    let current = 0;
-    const interval = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        setCount(target);
-        clearInterval(interval);
-      } else {
-        setCount(Math.floor(current));
-      }
-    }, duration / steps);
-    return () => clearInterval(interval);
-  }, [target, duration, started]);
-
-  return count;
-}
+import { ArrowRight } from 'lucide-react';
 
 export default function Landing() {
   const { theme, toggleTheme } = useTheme();
-  const blockedToday = useCounter(2847391);
 
   return (
     <div className="min-h-screen" style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
@@ -81,11 +51,12 @@ export default function Landing() {
           </div>
         </div>
 
-        {/* Live counter — minimal */}
+        {/* Status indicator — honest */}
         <div className="mt-20 pt-8 border-t" style={{ borderColor: 'var(--border-primary)' }}>
-          <div className="flex items-baseline gap-3">
-            <span className="text-5xl md:text-6xl font-bold font-mono">{blockedToday.toLocaleString()}</span>
-            <span className="text-sm" style={{ color: 'var(--text-muted)' }}>bots blocked today, so far</span>
+          <div className="flex items-center gap-3">
+            <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></span>
+            <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>Currently in development</span>
+            <span className="text-sm" style={{ color: 'var(--text-muted)' }}>· Looking for 10 founding customers</span>
           </div>
         </div>
       </section>
@@ -305,200 +276,169 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Case Studies - Real Results */}
+      {/* Founding Customer Program */}
       <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
         <div className="max-w-5xl mx-auto px-6 py-24">
-          <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
-            // case studies
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-16 tracking-tight">
-            Real teams. Real results.
-          </h2>
+          <div className="max-w-3xl">
+            <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
+              // founding customers
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
+              We're looking for 10 founding customers.
+            </h2>
+            <p className="text-lg leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
+              bot-shield is in active development. We're looking for 10 companies to build this with us. You'll get early access, direct line to engineering, and founding customer pricing locked in forever.
+            </p>
+            <p className="text-lg leading-relaxed mb-8" style={{ color: 'var(--text-secondary)' }}>
+              In return, we need your honest feedback. What works, what doesn't, what's missing. This is how we build something that actually solves the problem.
+            </p>
 
-          <div className="space-y-16">
-            {/* Case Study 1 */}
-            <div className="grid md:grid-cols-12 gap-8">
-              <div className="md:col-span-4">
-                <p className="text-xs font-mono mb-2" style={{ color: 'var(--text-muted)' }}>E-COMMERCE</p>
-                <h3 className="text-xl font-semibold mb-2">Mid-market retailer</h3>
-                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>2M monthly visitors</p>
+            <div className="space-y-4 mb-8">
+              <div className="flex gap-4">
+                <span className="text-2xl font-bold font-mono" style={{ color: 'var(--text-muted)' }}>01</span>
+                <div>
+                  <p className="font-semibold mb-1">Early access</p>
+                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Be among the first to use bot-shield. Shape the roadmap with your feedback.</p>
+                </div>
               </div>
-              <div className="md:col-span-8">
-                <p className="text-lg leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
-                  Pricing scrapers were copying their entire catalog daily, enabling competitors to undercut them by 5-10%. After deploying bot-shield in shadow mode for 2 weeks, they identified 35% of traffic as malicious scrapers.
-                </p>
-                <div className="grid grid-cols-3 gap-6 pt-6 border-t" style={{ borderColor: 'var(--border-primary)' }}>
-                  <div>
-                    <p className="text-3xl font-bold font-mono text-red-400 mb-1">$45K</p>
-                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Monthly revenue recovered</p>
-                  </div>
-                  <div>
-                    <p className="text-3xl font-bold font-mono text-green-400 mb-1">92%</p>
-                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Scrapers blocked</p>
-                  </div>
-                  <div>
-                    <p className="text-3xl font-bold font-mono mb-1">0</p>
-                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>False positives</p>
-                  </div>
+              <div className="flex gap-4">
+                <span className="text-2xl font-bold font-mono" style={{ color: 'var(--text-muted)' }}>02</span>
+                <div>
+                  <p className="font-semibold mb-1">Founding pricing</p>
+                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Lock in $200/mo forever. No price increases, ever.</p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <span className="text-2xl font-bold font-mono" style={{ color: 'var(--text-muted)' }}>03</span>
+                <div>
+                  <p className="font-semibold mb-1">Direct support</p>
+                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Weekly calls with the engineering team. Your problems get solved fast.</p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <span className="text-2xl font-bold font-mono" style={{ color: 'var(--text-muted)' }}>04</span>
+                <div>
+                  <p className="font-semibold mb-1">Zero risk</p>
+                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Start with shadow mode. See what we find before blocking anything.</p>
                 </div>
               </div>
             </div>
 
-            {/* Case Study 2 */}
-            <div className="grid md:grid-cols-12 gap-8 pt-16 border-t" style={{ borderColor: 'var(--border-primary)' }}>
-              <div className="md:col-span-4">
-                <p className="text-xs font-mono mb-2" style={{ color: 'var(--text-muted)' }}>TICKETING</p>
-                <h3 className="text-xl font-semibold mb-2">Concert venue chain</h3>
-                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>500K monthly visitors</p>
-              </div>
-              <div className="md:col-span-8">
-                <p className="text-lg leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
-                  Bots were buying up tickets within seconds of release, then reselling at 3-5x markup. Real fans couldn't get tickets. bot-shield's behavioral scoring caught the bots without slowing down legitimate buyers.
-                </p>
-                <div className="grid grid-cols-3 gap-6 pt-6 border-t" style={{ borderColor: 'var(--border-primary)' }}>
-                  <div>
-                    <p className="text-3xl font-bold font-mono text-red-400 mb-1">78%</p>
-                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Bot tickets prevented</p>
-                  </div>
-                  <div>
-                    <p className="text-3xl font-bold font-mono text-green-400 mb-1">2.1ms</p>
-                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Avg latency added</p>
-                  </div>
-                  <div>
-                    <p className="text-3xl font-bold font-mono mb-1">4.8★</p>
-                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Customer satisfaction</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Case Study 3 */}
-            <div className="grid md:grid-cols-12 gap-8 pt-16 border-t" style={{ borderColor: 'var(--border-primary)' }}>
-              <div className="md:col-span-4">
-                <p className="text-xs font-mono mb-2" style={{ color: 'var(--text-muted)' }}>API PLATFORM</p>
-                <h3 className="text-xl font-semibold mb-2">Usage-billed SaaS</h3>
-                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>10M API calls/day</p>
-              </div>
-              <div className="md:col-span-8">
-                <p className="text-lg leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
-                  Automated clients were hammering their API, driving bandwidth costs through the roof. bot-shield identified the patterns and challenged suspicious clients, reducing abuse by 89% while keeping legitimate API users fast.
-                </p>
-                <div className="grid grid-cols-3 gap-6 pt-6 border-t" style={{ borderColor: 'var(--border-primary)' }}>
-                  <div>
-                    <p className="text-3xl font-bold font-mono text-red-400 mb-1">$12K</p>
-                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Monthly bandwidth saved</p>
-                  </div>
-                  <div>
-                    <p className="text-3xl font-bold font-mono text-green-400 mb-1">89%</p>
-                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>API abuse reduced</p>
-                  </div>
-                  <div>
-                    <p className="text-3xl font-bold font-mono mb-1">15min</p>
-                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Time to deploy</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <a href="/contact" className="group btn-primary px-6 py-3 text-sm inline-flex items-center gap-2">
+              Apply for founding access
+              <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
+            </a>
+            <p className="text-sm mt-4" style={{ color: 'var(--text-muted)' }}>
+              7 spots remaining · No credit card required
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Security & Compliance */}
+      {/* Security Principles */}
       <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
         <div className="max-w-5xl mx-auto px-6 py-24">
           <div className="grid md:grid-cols-12 gap-12">
             <div className="md:col-span-5">
               <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
-                // security
+                // security principles
               </p>
               <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
-                Built for regulated industries.
+                Privacy by design.
               </h2>
               <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                 Your traffic never touches our disk. We process it in memory, make a decision, and forward it. No logging of request bodies. No data retention beyond what's needed for scoring.
               </p>
             </div>
             <div className="md:col-span-7">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-4">
                 <div className="p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-                  <p className="font-semibold mb-1">SOC 2 Type II</p>
-                  <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Annual audit by independent firm</p>
+                  <p className="font-semibold mb-1">In-memory processing</p>
+                  <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>Requests are scored in memory and immediately forwarded. Nothing is written to disk.</p>
                 </div>
                 <div className="p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-                  <p className="font-semibold mb-1">GDPR Compliant</p>
-                  <p className="text-xs" style={{ color: 'var(--text-muted)' }}>EU data processing agreement</p>
-                </div>
-                <div className="p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-                  <p className="font-semibold mb-1">99.99% Uptime</p>
-                  <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Multi-region redundancy</p>
+                  <p className="font-semibold mb-1">Minimal data retention</p>
+                  <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>We only keep what's needed for scoring: JA4 fingerprints, IP addresses, and decision logs. No request bodies.</p>
                 </div>
                 <div className="p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
                   <p className="font-semibold mb-1">Self-hosted option</p>
-                  <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Your infrastructure, your control</p>
+                  <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>For regulated industries: run the same binary in your own infrastructure. Your data never leaves your network.</p>
+                </div>
+                <div className="p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
+                  <p className="font-semibold mb-1">Transparent decisions</p>
+                  <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>Every block, every challenge, every pass comes with a full evidence trail. No black boxes.</p>
                 </div>
               </div>
               <p className="text-sm mt-6" style={{ color: 'var(--text-muted)' }}>
-                <a href="#" className="underline hover:text-white transition-colors">View our security whitepaper →</a>
+                <a href="/docs/security" className="underline hover:text-white transition-colors">Read our security principles →</a>
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Status & Transparency */}
+      {/* What's Built */}
       <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
         <div className="max-w-5xl mx-auto px-6 py-24">
           <div className="grid md:grid-cols-12 gap-12">
             <div className="md:col-span-5">
               <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
-                // transparency
+                // what's built
               </p>
               <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
-                We're up. Always.
+                Here's what works today.
               </h2>
-              <p className="text-lg leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
-                Real-time status page. Incident history. Post-mortems when things go wrong. Because trust is built in the open.
+              <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                We're not vaporware. The core engine is built and tested. We're looking for real traffic to prove it works at scale.
               </p>
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                <span className="text-sm font-medium text-green-400">All systems operational</span>
-              </div>
             </div>
             <div className="md:col-span-7">
               <div className="space-y-3">
                 <div className="flex items-center justify-between p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
                   <div>
-                    <p className="font-semibold text-sm">Proxy Edge</p>
-                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>TLS termination & scoring</p>
+                    <p className="font-semibold text-sm">TLS/JA4 fingerprinting</p>
+                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Reads ClientHello, generates JA4 hash</p>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-green-400"></span>
-                    <span className="text-xs font-mono text-green-400">100%</span>
+                  <span className="text-xs font-mono text-green-400">✓ Done</span>
+                </div>
+                <div className="flex items-center justify-between p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
+                  <div>
+                    <p className="font-semibold text-sm">UA consistency check</p>
+                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Flags mismatches between UA and TLS</p>
                   </div>
+                  <span className="text-xs font-mono text-green-400">✓ Done</span>
+                </div>
+                <div className="flex items-center justify-between p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
+                  <div>
+                    <p className="font-semibold text-sm">Scoring engine</p>
+                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Multi-signal scoring with configurable thresholds</p>
+                  </div>
+                  <span className="text-xs font-mono text-green-400">✓ Done</span>
+                </div>
+                <div className="flex items-center justify-between p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
+                  <div>
+                    <p className="font-semibold text-sm">JS challenge</p>
+                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>SHA-256 proof + canvas fingerprint</p>
+                  </div>
+                  <span className="text-xs font-mono text-green-400">✓ Done</span>
+                </div>
+                <div className="flex items-center justify-between p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
+                  <div>
+                    <p className="font-semibold text-sm">Shadow mode</p>
+                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Score without blocking, measure false positives</p>
+                  </div>
+                  <span className="text-xs font-mono text-green-400">✓ Done</span>
                 </div>
                 <div className="flex items-center justify-between p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
                   <div>
                     <p className="font-semibold text-sm">Dashboard</p>
-                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Analytics & evidence logs</p>
+                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Real-time analytics and evidence logs</p>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-green-400"></span>
-                    <span className="text-xs font-mono text-green-400">100%</span>
-                  </div>
-                </div>
-                <div className="flex items-center justify-between p-4 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-                  <div>
-                    <p className="font-semibold text-sm">API</p>
-                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Real-time scoring endpoint</p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-green-400"></span>
-                    <span className="text-xs font-mono text-green-400">100%</span>
-                  </div>
+                  <span className="text-xs font-mono text-green-400">✓ Done</span>
                 </div>
               </div>
               <p className="text-sm mt-6" style={{ color: 'var(--text-muted)' }}>
-                <a href="#" className="underline hover:text-white transition-colors">View full status page →</a>
+                <a href="/changelog" className="underline hover:text-white transition-colors">View full changelog →</a>
               </p>
             </div>
           </div>
@@ -608,50 +548,28 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Team - Human Element */}
+      {/* Founder */}
       <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
         <div className="max-w-5xl mx-auto px-6 py-24">
-          <div className="max-w-3xl mb-12">
+          <div className="max-w-3xl">
             <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
-              // the team
+              // who's building this
             </p>
             <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
-              Built by people who've been on both sides.
+              Hi, I'm Toufiq.
             </h2>
-            <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-              We've built bot protection at enterprise companies and fought against it as security researchers. We know what works, what doesn't, and what teams actually need.
+            <p className="text-lg leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
+              I'm building bot-shield because I've seen how broken bot protection is. Enterprise tools cost $50K/month and take weeks to onboard. Free tools react after the damage is done. Neither works for mid-size teams.
             </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div>
-              <div className="w-16 h-16 rounded-full mb-4 flex items-center justify-center text-2xl font-bold" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-                TQ
-              </div>
-              <p className="font-semibold mb-1">Toufiq Qureshi</p>
-              <p className="text-sm mb-2" style={{ color: 'var(--text-muted)' }}>Founder & Engineer</p>
-              <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
-                Previously built security infrastructure at scale. Obsessed with TLS fingerprints and proving decisions.
-              </p>
-            </div>
-            <div>
-              <div className="w-16 h-16 rounded-full mb-4 flex items-center justify-center text-2xl font-bold" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-                +
-              </div>
-              <p className="font-semibold mb-1">Growing team</p>
-              <p className="text-sm mb-2" style={{ color: 'var(--text-muted)' }}>Engineering & Security</p>
-              <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
-                Engineers from top security companies. We hire people who've built the systems we're competing against.
-              </p>
-            </div>
-            <div>
-              <div className="w-16 h-16 rounded-full mb-4 flex items-center justify-center text-2xl font-bold" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-                ♥
-              </div>
-              <p className="font-semibold mb-1">Open source</p>
-              <p className="text-sm mb-2" style={{ color: 'var(--text-muted)' }}>Built on proven libraries</p>
-              <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
-                We use open-source TLS/JA4 libraries internally. We don't reinvent solved problems — we build on top of them.
+            <p className="text-lg leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
+              I've built security infrastructure at scale. I've fought against bot protection as a security researcher. I know what works, what doesn't, and what teams actually need.
+            </p>
+            <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+              bot-shield is my attempt to build something better. Something transparent. Something that actually proves its decisions.
+            </p>
+            <div className="mt-8 pt-8 border-t" style={{ borderColor: 'var(--border-primary)' }}>
+              <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
+                Questions? <a href="/contact" className="underline hover:text-white transition-colors">Let's talk →</a>
               </p>
             </div>
           </div>
@@ -674,10 +592,10 @@ export default function Landing() {
             <div className="md:col-span-7 flex items-center">
               <div>
                 <p className="text-lg leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
-                  Most teams don't realize how much revenue they're losing until they see the numbers. An e-commerce site with 2M monthly visitors and 35% bot traffic was losing <span className="font-bold text-white">$45,000/month</span> to pricing scrapers.
+                  Most teams don't realize how much revenue they're losing to bots until they measure it. Pricing scrapers, ticket hoarders, API abusers — they're all costing you real money every day.
                 </p>
                 <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                  After bot-shield, they recovered 92% of that revenue. The ROI pays for itself in the first week.
+                  Use this calculator to estimate your exposure. Then point a CNAME at bot-shield and see the real numbers in your own traffic.
                 </p>
               </div>
             </div>
@@ -719,52 +637,55 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Press & Recognition */}
+      {/* Build in Public */}
       <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
         <div className="max-w-5xl mx-auto px-6 py-24">
-          <div className="max-w-3xl mb-12">
+          <div className="max-w-3xl">
             <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
-              // recognition
+              // building in public
             </p>
             <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
-              What people are saying.
+              Follow the journey.
             </h2>
-          </div>
+            <p className="text-lg leading-relaxed mb-8" style={{ color: 'var(--text-secondary)' }}>
+              We're building bot-shield in the open. Every technical decision, every challenge, every win — shared publicly. Because trust is built through transparency.
+            </p>
 
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            <div className="p-6 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-              <p className="text-lg leading-relaxed mb-4" style={{ color: 'var(--text-secondary)' }}>
-                "Finally, a bot protection tool that actually shows you what it's doing. The evidence trail is a game-changer for compliance."
-              </p>
-              <p className="text-sm font-semibold">Security Weekly</p>
-              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Product Review, 2026</p>
-            </div>
-            <div className="p-6 rounded" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)' }}>
-              <p className="text-lg leading-relaxed mb-4" style={{ color: 'var(--text-secondary)' }}>
-                "The JA4 fingerprinting approach is elegant. First-request scoring without prior sighting is exactly what the market needs."
-              </p>
-              <p className="text-sm font-semibold">TechCrunch</p>
-              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Startup Spotlight, 2026</p>
-            </div>
-          </div>
+            <div className="space-y-4 mb-8">
+              <a href="/changelog" className="block p-4 rounded transition-colors hover:bg-[var(--bg-tertiary)]" style={{ border: '1px solid var(--border-primary)' }}>
+                <div className="flex items-center justify-between mb-2">
+                  <p className="font-semibold">Changelog</p>
+                  <span className="text-xs" style={{ color: 'var(--text-muted)' }}>Updated weekly</span>
+                </div>
+                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                  Every feature, every fix, every improvement. See exactly what we're shipping.
+                </p>
+              </a>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-12 border-t" style={{ borderColor: 'var(--border-primary)' }}>
-            <div className="text-center">
-              <p className="text-3xl font-bold mb-1">4.9★</p>
-              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>G2 Rating</p>
+              <a href="/docs" className="block p-4 rounded transition-colors hover:bg-[var(--bg-tertiary)]" style={{ border: '1px solid var(--border-primary)' }}>
+                <div className="flex items-center justify-between mb-2">
+                  <p className="font-semibold">Technical docs</p>
+                  <span className="text-xs" style={{ color: 'var(--text-muted)' }}>API reference</span>
+                </div>
+                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                  How JA4 fingerprinting works. How our scoring engine decides. Full API documentation.
+                </p>
+              </a>
+
+              <a href="https://github.com/ToufiqQureshi/bot-shield" target="_blank" rel="noopener noreferrer" className="block p-4 rounded transition-colors hover:bg-[var(--bg-tertiary)]" style={{ border: '1px solid var(--border-primary)' }}>
+                <div className="flex items-center justify-between mb-2">
+                  <p className="font-semibold">GitHub</p>
+                  <span className="text-xs" style={{ color: 'var(--text-muted)' }}>Open source</span>
+                </div>
+                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                  We use open-source libraries internally. See what we're built on.
+                </p>
+              </a>
             </div>
-            <div className="text-center">
-              <p className="text-3xl font-bold mb-1">98%</p>
-              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Customer satisfaction</p>
-            </div>
-            <div className="text-center">
-              <p className="text-3xl font-bold mb-1">1,200+</p>
-              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Active customers</p>
-            </div>
-            <div className="text-center">
-              <p className="text-3xl font-bold mb-1">2.8M</p>
-              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Bots blocked daily</p>
-            </div>
+
+            <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
+              Questions? <a href="/contact" className="underline hover:text-white transition-colors">Get in touch →</a>
+            </p>
           </div>
         </div>
       </section>
@@ -794,8 +715,9 @@ export default function Landing() {
           <span className="text-sm font-bold tracking-tight">bot-shield</span>
           <div className="flex gap-6 text-xs" style={{ color: 'var(--text-muted)' }}>
             <a href="/pricing">Pricing</a>
-            <a href="/">Dashboard</a>
-            <span>Docs</span>
+            <a href="/changelog">Changelog</a>
+            <a href="/docs">Docs</a>
+            <a href="/contact">Contact</a>
             <span>© 2026</span>
           </div>
         </div>
