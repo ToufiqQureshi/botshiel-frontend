@@ -1,14 +1,13 @@
 import { useMemo } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
-import { AlertTriangle, TrendingUp, TrendingDown, Shield, ShieldAlert, ShieldCheck, Zap } from 'lucide-react';
 import { generateTrafficData, topOffenders } from '../data/mockData';
 
 const metrics = [
-  { label: 'Total Requests', value: '2.41M', change: '+12.3%', up: true, icon: Shield },
-  { label: 'Clean Traffic', value: '1.97M', change: '+8.1%', up: true, icon: ShieldCheck },
-  { label: 'Blocked', value: '187K', change: '+23.4%', up: false, icon: ShieldAlert, color: 'red' },
-  { label: 'Challenged', value: '142K', change: '-5.2%', up: true, icon: Zap, color: 'yellow' },
-  { label: 'Deceived', value: '98K', change: '+31.7%', up: true, icon: AlertTriangle, color: 'orange' },
+  { label: 'Total Requests', value: '2.41M', change: '+12.3%', up: true },
+  { label: 'Clean Traffic', value: '1.97M', change: '+8.1%', up: true },
+  { label: 'Blocked', value: '187K', change: '+23.4%', up: false, color: 'red' },
+  { label: 'Challenged', value: '142K', change: '-5.2%', up: true, color: 'yellow' },
+  { label: 'Deceived', value: '98K', change: '+31.7%', up: true, color: 'orange' },
 ];
 
 function CustomTooltip({ active, payload, label }: any) {
@@ -33,11 +32,8 @@ export default function Overview() {
   return (
     <div className="space-y-6 animate-in">
       {/* Shadow Mode Banner */}
-      <div className="flex items-center gap-3 px-4 py-3 rounded-lg transition-all hover:border-yellow-500/30" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-secondary)' }}>
-        <div className="relative flex-shrink-0">
-          <AlertTriangle size={16} className="text-yellow-500" />
-          <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span>
-        </div>
+      <div className="flex items-center gap-3 px-4 py-3 rounded-lg" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-secondary)' }}>
+        <span className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse flex-shrink-0"></span>
         <div className="flex-1 flex items-center gap-2">
           <span className="text-sm font-semibold text-yellow-500">Shadow Mode</span>
           <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>Scoring traffic but not blocking. <button className="text-yellow-500 hover:text-yellow-400 font-medium underline underline-offset-2">Switch to Active →</button></span>
@@ -47,32 +43,25 @@ export default function Overview() {
 
       {/* Metrics Strip */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-        {metrics.map((m, i) => {
-          const Icon = m.icon;
-          return (
-            <div key={i} className="card p-4 group hover:border-blue-500/20 transition-all cursor-default">
-              <div className="flex items-center justify-between mb-3">
-                <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'var(--bg-tertiary)' }}>
-                  <Icon size={14} className={m.color === 'red' ? 'text-red-400' : m.color === 'yellow' ? 'text-yellow-400' : m.color === 'orange' ? 'text-orange-400' : ''} style={{ color: m.color ? undefined : 'var(--text-muted)' }} />
-                </div>
-                <div className={`flex items-center gap-0.5 text-xs font-medium ${m.up ? 'text-green-400' : 'text-red-400'}`}>
-                  {m.up ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
-                  <span>{m.change}</span>
-                </div>
-              </div>
-              <p className="text-2xl font-bold font-mono" style={{ color: 'var(--text-primary)' }}>{m.value}</p>
-              <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>{m.label}</p>
+        {metrics.map((m, i) => (
+          <div key={i} className="card p-4">
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{m.label}</p>
+              <span className={`text-xs font-mono ${m.up ? 'text-green-400' : 'text-red-400'}`}>
+                {m.change}
+              </span>
             </div>
-          );
-        })}
+            <p className="text-2xl font-bold font-mono" style={{ color: 'var(--text-primary)' }}>{m.value}</p>
+          </div>
+        ))}
       </div>
 
       {/* Traffic Chart */}
       <div className="card p-5">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h2 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Traffic Volume</h2>
-            <p className="text-xs mt-0.5" style={{ color: 'var(--text-muted)' }}>Requests by decision — Last 24 hours</p>
+            <p className="text-xs font-mono mb-1" style={{ color: 'var(--text-muted)' }}>// traffic</p>
+            <h2 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Last 24 hours</h2>
           </div>
           <div className="flex gap-1">
             <button className="btn-secondary text-xs py-1">24h</button>
@@ -119,10 +108,10 @@ export default function Overview() {
       <div className="card overflow-hidden">
         <div className="flex items-center justify-between px-5 py-4 border-b" style={{ borderColor: 'var(--border-primary)' }}>
           <div>
-            <h2 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Top Offenders</h2>
-            <p className="text-xs mt-0.5" style={{ color: 'var(--text-muted)' }}>IPs with the most blocked requests</p>
+            <p className="text-xs font-mono mb-1" style={{ color: 'var(--text-muted)' }}>// top offenders</p>
+            <h2 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Most blocked IPs</h2>
           </div>
-          <button className="btn-secondary text-xs">View All</button>
+          <button className="btn-secondary text-xs">View all</button>
         </div>
         <div className="overflow-x-auto">
           <table className="data-table">

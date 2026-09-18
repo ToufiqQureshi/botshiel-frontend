@@ -1,94 +1,6 @@
 import { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
-import { Shield, Check, ArrowRight, Sun, Moon } from 'lucide-react';
-
-const plans = [
-  {
-    name: 'Starter',
-    price: '$200',
-    period: '/mo',
-    description: 'For growing sites that need bot protection now.',
-    features: [
-      'Up to 1M requests/month',
-      '3 protected domains',
-      'JA4 TLS fingerprinting',
-      'Multi-layer scoring',
-      'Shadow mode',
-      'Evidence trail (24h)',
-      'JS challenge',
-      'Email support',
-    ],
-    cta: 'Start free trial',
-    highlighted: false,
-  },
-  {
-    name: 'Growth',
-    price: '$500',
-    period: '/mo',
-    description: 'For businesses where bots are a revenue leak.',
-    features: [
-      'Up to 10M requests/month',
-      '10 protected domains',
-      'Everything in Starter',
-      'Behavioral scoring',
-      'Deception engine (honeypot)',
-      'Evidence trail (30 days)',
-      'Custom rules & exceptions',
-      'SIEM integrations',
-      'Rate limiting per endpoint',
-      'Priority support',
-    ],
-    cta: 'Start free trial',
-    highlighted: true,
-  },
-  {
-    name: 'Enterprise',
-    price: 'Custom',
-    period: '',
-    description: 'Self-hosted. For regulated industries.',
-    features: [
-      'Unlimited requests',
-      'Unlimited domains',
-      'Everything in Growth',
-      'Self-hosted deployment',
-      'Data residency compliance',
-      'SSO / SAML',
-      'Dedicated account manager',
-      'SLA guarantee',
-      'Custom integrations',
-      'Fingerprint database access',
-    ],
-    cta: 'Talk to sales',
-    highlighted: false,
-  },
-];
-
-const faqs = [
-  {
-    q: 'How long does onboarding take?',
-    a: '15 minutes. Add a CNAME record, verify domain ownership, and bot-shield is protecting your traffic. No code changes, no SDK, no install.',
-  },
-  {
-    q: 'What if bot-shield blocks a real user?',
-    a: 'Shadow mode lets you run bot-shield without blocking anything first. See exactly what it would block, tune thresholds, then enforce. Every decision comes with a full evidence trail so you can investigate.',
-  },
-  {
-    q: 'How is this different from Cloudflare?',
-    a: 'Cloudflare is a CDN that happens to have bot detection. bot-shield is purpose-built for bot detection — we read the live TLS handshake and score the first request, not react to logs after the fact.',
-  },
-  {
-    q: 'Do you support HTTP/2?',
-    a: 'HTTP/1.1 fingerprinting is live today. HTTP/2 fingerprinting is on the roadmap and actively being built.',
-  },
-  {
-    q: 'What about false positives?',
-    a: 'Our scoring engine uses multiple signals — no single check can trigger a block. Shadow mode lets you measure false positives against real traffic before enforcing. Known-browser fingerprints ensure niche browsers aren\'t wrongly flagged.',
-  },
-  {
-    q: 'Can I self-host?',
-    a: 'Yes — that\'s the Enterprise plan. Same binary, your infrastructure. For teams in regulated sectors who can\'t send traffic to our cloud.',
-  },
-];
+import { ArrowRight, Sun, Moon } from 'lucide-react';
 
 export default function Pricing() {
   const { theme, toggleTheme } = useTheme();
@@ -98,130 +10,170 @@ export default function Pricing() {
     <div className="min-h-screen" style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
       {/* Nav */}
       <nav className="sticky top-0 z-50 border-b" style={{ borderColor: 'var(--border-primary)', background: theme === 'dark' ? 'rgba(0,0,0,0.8)' : 'rgba(255,255,255,0.8)', backdropFilter: 'blur(12px)' }}>
-        <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-md flex items-center justify-center" style={{ background: 'var(--text-primary)' }}>
-              <Shield size={14} style={{ color: 'var(--bg-primary)' }} />
-            </div>
-            <span className="font-semibold text-sm tracking-tight">bot-shield</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <button onClick={toggleTheme} className="p-2 rounded-md transition-colors" style={{ color: 'var(--text-muted)' }}>
-              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+        <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+          <a href="/landing" className="font-bold text-sm tracking-tight">bot-shield</a>
+          <div className="flex items-center gap-4">
+            <button onClick={toggleTheme} className="text-sm" style={{ color: 'var(--text-muted)' }}>
+              {theme === 'dark' ? 'Light' : 'Dark'}
             </button>
-            <a href="/landing" className="btn-secondary text-xs">Home</a>
-            <a href="/" className="btn-secondary text-xs">Dashboard</a>
+            <a href="/" className="text-sm" style={{ color: 'var(--text-secondary)' }}>Dashboard</a>
           </div>
         </div>
       </nav>
 
       {/* Hero */}
-      <section className="max-w-6xl mx-auto px-4 pt-24 pb-16 text-center">
-        <p className="text-sm font-medium mb-3 text-blue-400">PRICING</p>
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
+      <section className="max-w-5xl mx-auto px-6 pt-24 pb-16">
+        <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
+          // pricing
+        </p>
+        <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight max-w-2xl">
           Simple pricing.<br />No surprises.
         </h1>
-        <p className="text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-          Every plan includes a bandwidth cap so you never get a surprise bill. Start with shadow mode — see what we'd block before enforcing anything.
+        <p className="text-lg max-w-xl" style={{ color: 'var(--text-secondary)' }}>
+          Every plan includes a bandwidth cap. Start with shadow mode — see what we'd block before enforcing anything.
         </p>
       </section>
 
       {/* Plans */}
-      <section className="max-w-6xl mx-auto px-4 pb-16">
-        <div className="grid md:grid-cols-3 gap-4">
-          {plans.map((plan, i) => (
-            <div
-              key={i}
-              className={`card p-6 relative ${plan.highlighted ? 'ring-1 ring-blue-500' : ''}`}
-            >
-              {plan.highlighted && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className="badge badge-blue text-[10px]">Most Popular</span>
-                </div>
-              )}
-              <div className="mb-6">
-                <h3 className="text-lg font-semibold mb-1">{plan.name}</h3>
-                <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{plan.description}</p>
-              </div>
-              <div className="mb-6">
-                <span className="text-3xl font-bold">{plan.price}</span>
-                <span className="text-sm" style={{ color: 'var(--text-muted)' }}>{plan.period}</span>
-              </div>
-              <a
-                href="/"
-                className={`w-full py-2.5 rounded-md text-sm font-medium flex items-center justify-center gap-2 transition-opacity mb-6 ${
-                  plan.highlighted ? 'btn-primary' : 'btn-secondary'
-                }`}
-              >
-                {plan.cta} <ArrowRight size={14} />
-              </a>
-              <ul className="space-y-2.5">
-                {plan.features.map((feature, j) => (
-                  <li key={j} className="flex items-start gap-2 text-xs">
-                    <Check size={14} className="text-green-400 flex-shrink-0 mt-0.5" />
-                    <span style={{ color: 'var(--text-secondary)' }}>{feature}</span>
-                  </li>
-                ))}
-              </ul>
+      <section className="max-w-5xl mx-auto px-6 pb-20">
+        <div className="grid md:grid-cols-3 gap-px" style={{ background: 'var(--border-primary)' }}>
+          {/* Starter */}
+          <div className="p-8" style={{ background: 'var(--bg-primary)' }}>
+            <p className="text-xs font-mono mb-4" style={{ color: 'var(--text-muted)' }}>STARTER</p>
+            <div className="mb-6">
+              <span className="text-4xl font-bold">$200</span>
+              <span className="text-sm" style={{ color: 'var(--text-muted)' }}>/mo</span>
             </div>
-          ))}
+            <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
+              For growing sites that need bot protection now.
+            </p>
+            <a href="/" className="btn-secondary w-full py-2.5 text-sm text-center block mb-8">
+              Start free trial
+            </a>
+            <ul className="space-y-3 text-sm" style={{ color: 'var(--text-secondary)' }}>
+              <li>1M requests/month</li>
+              <li>3 protected domains</li>
+              <li>JA4 TLS fingerprinting</li>
+              <li>Multi-layer scoring</li>
+              <li>Shadow mode</li>
+              <li>Evidence trail (24h)</li>
+              <li>JS challenge</li>
+              <li>Email support</li>
+            </ul>
+          </div>
+
+          {/* Growth */}
+          <div className="p-8 relative" style={{ background: 'var(--bg-tertiary)' }}>
+            <div className="absolute top-4 right-4">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded" style={{ background: 'var(--accent-blue)', color: 'white' }}>POPULAR</span>
+            </div>
+            <p className="text-xs font-mono mb-4" style={{ color: 'var(--text-muted)' }}>GROWTH</p>
+            <div className="mb-6">
+              <span className="text-4xl font-bold">$500</span>
+              <span className="text-sm" style={{ color: 'var(--text-muted)' }}>/mo</span>
+            </div>
+            <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
+              For businesses where bots are a revenue leak.
+            </p>
+            <a href="/" className="btn-primary w-full py-2.5 text-sm text-center block mb-8">
+              Start free trial
+            </a>
+            <ul className="space-y-3 text-sm" style={{ color: 'var(--text-secondary)' }}>
+              <li>10M requests/month</li>
+              <li>10 protected domains</li>
+              <li>Everything in Starter</li>
+              <li>Behavioral scoring</li>
+              <li>Deception engine</li>
+              <li>Evidence trail (30 days)</li>
+              <li>Custom rules</li>
+              <li>SIEM integrations</li>
+              <li>Rate limiting per endpoint</li>
+              <li>Priority support</li>
+            </ul>
+          </div>
+
+          {/* Enterprise */}
+          <div className="p-8" style={{ background: 'var(--bg-primary)' }}>
+            <p className="text-xs font-mono mb-4" style={{ color: 'var(--text-muted)' }}>ENTERPRISE</p>
+            <div className="mb-6">
+              <span className="text-4xl font-bold">Custom</span>
+            </div>
+            <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
+              Self-hosted. For regulated industries.
+            </p>
+            <a href="/" className="btn-secondary w-full py-2.5 text-sm text-center block mb-8">
+              Talk to sales
+            </a>
+            <ul className="space-y-3 text-sm" style={{ color: 'var(--text-secondary)' }}>
+              <li>Unlimited requests</li>
+              <li>Unlimited domains</li>
+              <li>Everything in Growth</li>
+              <li>Self-hosted deployment</li>
+              <li>Data residency</li>
+              <li>SSO / SAML</li>
+              <li>Dedicated account manager</li>
+              <li>SLA guarantee</li>
+              <li>Custom integrations</li>
+              <li>Fingerprint database access</li>
+            </ul>
+          </div>
         </div>
       </section>
 
       {/* Comparison */}
       <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
-        <div className="max-w-4xl mx-auto px-4 py-20">
-          <div className="max-w-2xl mx-auto text-center mb-10">
-            <h2 className="text-3xl font-bold mb-4 tracking-tight">Why not the alternatives?</h2>
-            <p style={{ color: 'var(--text-secondary)' }}>
-              We're not trying to be everything. We're trying to be the best at one thing: inline bot detection with proof.
+        <div className="max-w-5xl mx-auto px-6 py-20">
+          <div className="max-w-2xl mb-12">
+            <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
+              // comparison
             </p>
+            <h2 className="text-3xl font-bold tracking-tight">
+              Why not the alternatives?
+            </h2>
           </div>
-          <div className="card overflow-hidden">
-            <table className="data-table">
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
               <thead>
-                <tr>
-                  <th></th>
-                  <th className="text-center">
-                    <span className="font-semibold text-blue-400">bot-shield</span>
-                  </th>
-                  <th className="text-center">Enterprise tools</th>
-                  <th className="text-center">Free / OSS</th>
+                <tr className="border-b" style={{ borderColor: 'var(--border-primary)' }}>
+                  <th className="text-left py-3 pr-4 font-medium" style={{ color: 'var(--text-muted)' }}></th>
+                  <th className="text-center py-3 px-4 font-semibold">bot-shield</th>
+                  <th className="text-center py-3 px-4" style={{ color: 'var(--text-muted)' }}>Enterprise</th>
+                  <th className="text-center py-3 px-4" style={{ color: 'var(--text-muted)' }}>Free / OSS</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td className="font-medium" style={{ color: 'var(--text-primary)' }}>First-request detection</td>
-                  <td className="text-center"><span className="text-green-400">✓</span></td>
-                  <td className="text-center"><span className="text-green-400">✓</span></td>
-                  <td className="text-center"><span className="text-red-400">✕</span></td>
+              <tbody style={{ color: 'var(--text-secondary)' }}>
+                <tr className="border-b" style={{ borderColor: 'var(--border-primary)' }}>
+                  <td className="py-3 pr-4">First-request detection</td>
+                  <td className="text-center text-green-400">✓</td>
+                  <td className="text-center text-green-400">✓</td>
+                  <td className="text-center text-red-400">✕</td>
                 </tr>
-                <tr>
-                  <td className="font-medium" style={{ color: 'var(--text-primary)' }}>Evidence trail</td>
-                  <td className="text-center"><span className="text-green-400">✓</span></td>
-                  <td className="text-center"><span style={{ color: 'var(--text-muted)' }}>Partial</span></td>
-                  <td className="text-center"><span className="text-red-400">✕</span></td>
+                <tr className="border-b" style={{ borderColor: 'var(--border-primary)' }}>
+                  <td className="py-3 pr-4">Evidence trail</td>
+                  <td className="text-center text-green-400">✓</td>
+                  <td className="text-center" style={{ color: 'var(--text-muted)' }}>Partial</td>
+                  <td className="text-center text-red-400">✕</td>
                 </tr>
-                <tr>
-                  <td className="font-medium" style={{ color: 'var(--text-primary)' }}>Shadow mode</td>
-                  <td className="text-center"><span className="text-green-400">✓</span></td>
-                  <td className="text-center"><span className="text-red-400">✕</span></td>
-                  <td className="text-center"><span className="text-red-400">✕</span></td>
+                <tr className="border-b" style={{ borderColor: 'var(--border-primary)' }}>
+                  <td className="py-3 pr-4">Shadow mode</td>
+                  <td className="text-center text-green-400">✓</td>
+                  <td className="text-center text-red-400">✕</td>
+                  <td className="text-center text-red-400">✕</td>
                 </tr>
-                <tr>
-                  <td className="font-medium" style={{ color: 'var(--text-primary)' }}>Self-hosted option</td>
-                  <td className="text-center"><span className="text-green-400">✓</span></td>
-                  <td className="text-center"><span className="text-red-400">✕</span></td>
-                  <td className="text-center"><span className="text-green-400">✓</span></td>
+                <tr className="border-b" style={{ borderColor: 'var(--border-primary)' }}>
+                  <td className="py-3 pr-4">Self-hosted option</td>
+                  <td className="text-center text-green-400">✓</td>
+                  <td className="text-center text-red-400">✕</td>
+                  <td className="text-center text-green-400">✓</td>
                 </tr>
-                <tr>
-                  <td className="font-medium" style={{ color: 'var(--text-primary)' }}>Setup time</td>
+                <tr className="border-b" style={{ borderColor: 'var(--border-primary)' }}>
+                  <td className="py-3 pr-4">Setup time</td>
                   <td className="text-center font-mono text-xs text-green-400">15 min</td>
                   <td className="text-center font-mono text-xs">Weeks</td>
                   <td className="text-center font-mono text-xs">Hours</td>
                 </tr>
                 <tr>
-                  <td className="font-medium" style={{ color: 'var(--text-primary)' }}>Starting price</td>
+                  <td className="py-3 pr-4">Starting price</td>
                   <td className="text-center font-mono text-xs text-green-400">$200/mo</td>
                   <td className="text-center font-mono text-xs">$1,500+/mo</td>
                   <td className="text-center font-mono text-xs">$0</td>
@@ -234,14 +186,24 @@ export default function Pricing() {
 
       {/* FAQ */}
       <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
-        <div className="max-w-3xl mx-auto px-4 py-16">
-          <h2 className="text-2xl font-bold text-center mb-8">Frequently asked questions</h2>
-          <div className="space-y-2">
-            {faqs.map((faq, i) => (
-              <div key={i} className="card overflow-hidden">
+        <div className="max-w-3xl mx-auto px-6 py-20">
+          <p className="text-sm font-mono mb-4" style={{ color: 'var(--text-muted)' }}>
+            // faq
+          </p>
+          <h2 className="text-3xl font-bold mb-10 tracking-tight">Questions.</h2>
+          <div className="space-y-0">
+            {[
+              { q: 'How long does onboarding take?', a: '15 minutes. Add a CNAME record, verify domain ownership, and bot-shield is protecting your traffic. No code changes, no SDK, no install.' },
+              { q: 'What if bot-shield blocks a real user?', a: 'Shadow mode lets you run bot-shield without blocking anything first. See exactly what it would block, tune thresholds, then enforce. Every decision comes with a full evidence trail.' },
+              { q: 'How is this different from Cloudflare?', a: 'Cloudflare is a CDN that happens to have bot detection. bot-shield is purpose-built — we read the live TLS handshake and score the first request, not react to logs after the fact.' },
+              { q: 'Do you support HTTP/2?', a: 'HTTP/1.1 fingerprinting is live today. HTTP/2 fingerprinting is on the roadmap and actively being built.' },
+              { q: 'What about false positives?', a: 'Our scoring engine uses multiple signals — no single check can trigger a block. Shadow mode lets you measure false positives against real traffic before enforcing.' },
+              { q: 'Can I self-host?', a: 'Yes — that\'s the Enterprise plan. Same binary, your infrastructure. For teams in regulated sectors who can\'t send traffic to our cloud.' },
+            ].map((faq, i) => (
+              <div key={i} className="border-b" style={{ borderColor: 'var(--border-primary)' }}>
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full text-left px-5 py-4 flex items-center justify-between"
+                  className="w-full text-left py-5 flex items-center justify-between"
                 >
                   <span className="text-sm font-medium">{faq.q}</span>
                   <span className="text-lg" style={{ color: 'var(--text-muted)' }}>
@@ -249,9 +211,7 @@ export default function Pricing() {
                   </span>
                 </button>
                 {openFaq === i && (
-                  <div className="px-5 pb-4 animate-in">
-                    <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>{faq.a}</p>
-                  </div>
+                  <p className="text-sm pb-5 pr-8" style={{ color: 'var(--text-secondary)' }}>{faq.a}</p>
                 )}
               </div>
             ))}
@@ -261,31 +221,28 @@ export default function Pricing() {
 
       {/* CTA */}
       <section className="border-t" style={{ borderColor: 'var(--border-primary)' }}>
-        <div className="max-w-3xl mx-auto px-4 py-16 text-center">
-          <h2 className="text-2xl font-bold mb-4">Ready to stop losing revenue to bots?</h2>
-          <p className="mb-6" style={{ color: 'var(--text-secondary)' }}>Start with shadow mode. See what bot-shield finds. Then decide.</p>
-          <a href="/" className="btn-primary px-8 py-3 text-sm inline-flex items-center gap-2">
-            Start free trial <ArrowRight size={14} />
+        <div className="max-w-5xl mx-auto px-6 py-24 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">Ready?</h2>
+          <p className="text-lg mb-8" style={{ color: 'var(--text-secondary)' }}>
+            14-day trial. No credit card. Point a CNAME and see what we find.
+          </p>
+          <a href="/" className="group btn-primary px-8 py-3 text-sm inline-flex items-center gap-2">
+            Start free trial
+            <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
           </a>
         </div>
       </section>
 
       {/* Footer */}
       <footer className="border-t py-8" style={{ borderColor: 'var(--border-primary)' }}>
-        <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-6 h-6 rounded flex items-center justify-center" style={{ background: 'var(--text-primary)' }}>
-              <Shield size={12} style={{ color: 'var(--bg-primary)' }} />
-            </div>
-            <span className="text-sm font-medium tracking-tight">bot-shield</span>
-          </div>
+        <div className="max-w-5xl mx-auto px-6 flex items-center justify-between">
+          <span className="text-sm font-bold tracking-tight">bot-shield</span>
           <div className="flex gap-6 text-xs" style={{ color: 'var(--text-muted)' }}>
-            <a href="/landing" className="hover:text-white transition-colors">Home</a>
-            <a href="/" className="hover:text-white transition-colors">Dashboard</a>
+            <a href="/landing">Home</a>
+            <a href="/">Dashboard</a>
             <span>Docs</span>
-            <span>Status</span>
+            <span>© 2026</span>
           </div>
-          <p className="text-xs" style={{ color: 'var(--text-muted)' }}>© 2026 bot-shield. All rights reserved.</p>
         </div>
       </footer>
     </div>
